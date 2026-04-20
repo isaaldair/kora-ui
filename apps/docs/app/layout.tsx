@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono, DM_Serif_Display } from "next/font/google";
+import { SiNpm, SiGithub } from "react-icons/si";
+import { Button } from "kora-ui";
 import "./globals.css";
 import { ThemeControls } from "@/components/theme-controls";
 
@@ -55,11 +57,12 @@ export default function RootLayout({
 function SiteHeader() {
   return (
     <header className="sticky top-0 z-10 border-b border-neutral-200/60 bg-white/70 backdrop-blur dark:border-neutral-800/60 dark:bg-black/60">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
         <Link href="/" className="text-sm font-semibold tracking-tight">
           kora<span className="text-neutral-400">-ui</span>
         </Link>
-        <nav className="flex items-center gap-5 text-sm text-neutral-600 dark:text-neutral-400">
+
+        <nav className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
           <Link
             href="/"
             className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
@@ -72,27 +75,37 @@ function SiteHeader() {
           >
             Docs
           </Link>
-          <a
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
             href="https://www.npmjs.com/package/kora-ui"
             target="_blank"
             rel="noreferrer"
-            className="hidden transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 sm:inline"
+            aria-label="View on npm"
           >
-            npm
-          </a>
-          <a
+            <SiNpm size={14} />
+            <span className="hidden sm:inline">npm</span>
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
             href="https://github.com/isaaldair/kora-ui"
             target="_blank"
             rel="noreferrer"
-            className="hidden transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 sm:inline"
+            aria-label="View on GitHub"
           >
-            GitHub
-          </a>
-          <a
+            <SiGithub size={14} />
+            <span className="hidden sm:inline">GitHub</span>
+          </Button>
+          <Button
+            size="sm"
             href={PAYPAL_URL}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium text-neutral-900 shadow-sm transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900"
+            aria-label="Support via PayPal"
           >
             <svg
               aria-hidden="true"
@@ -104,8 +117,8 @@ function SiteHeader() {
               <path d="M12 21s-7.5-4.5-9.7-9.1C.6 7.5 3.5 3 7.5 3c2 0 3.6 1 4.5 2.5C12.9 4 14.5 3 16.5 3c4 0 6.9 4.5 5.2 8.9C19.5 16.5 12 21 12 21z" />
             </svg>
             <span className="hidden sm:inline">Support</span>
-          </a>
-        </nav>
+          </Button>
+        </div>
       </div>
     </header>
   );
