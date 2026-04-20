@@ -34,6 +34,37 @@ export const docsNav: DocsNavSection[] = [
     ],
   },
   {
+    title: "Special components",
+    items: [
+      {
+        label: "Buttons",
+        items: [
+          { label: "Confetti button", href: "/docs/components/confetti-button" },
+        ],
+      },
+      {
+        label: "Data display",
+        items: [
+          { label: "Code block", href: "/docs/components/code-block" },
+          { label: "JSON viewer", href: "/docs/components/json-viewer" },
+          { label: "QR code", href: "/docs/components/qr-code" },
+        ],
+      },
+      {
+        label: "Input",
+        items: [
+          { label: "Rating", href: "/docs/components/rating" },
+        ],
+      },
+      {
+        label: "Social",
+        items: [
+          { label: "WhatsApp float", href: "/docs/components/whatsapp-float" },
+        ],
+      },
+    ],
+  },
+  {
     title: "Components",
     items: [
       { label: "Alert", href: "/docs/components/alert" },
@@ -46,17 +77,6 @@ export const docsNav: DocsNavSection[] = [
       { label: "Label", href: "/docs/components/label" },
       { label: "Separator", href: "/docs/components/separator" },
       { label: "Textarea", href: "/docs/components/textarea" },
-    ],
-  },
-  {
-    title: "Social",
-    items: [
-      {
-        label: "Floating",
-        items: [
-          { label: "WhatsApp float", href: "/docs/components/whatsapp-float" },
-        ],
-      },
     ],
   },
 ];
