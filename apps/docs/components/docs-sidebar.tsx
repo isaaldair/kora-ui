@@ -4,11 +4,49 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { docsNav, isGroup, type DocsNavLink } from "@/lib/docs-nav";
 
-export function DocsSidebar() {
+export function DocsSidebar({
+  collapsed = false,
+  onToggle,
+}: {
+  collapsed?: boolean;
+  onToggle?: () => void;
+}) {
   const pathname = usePathname();
+
+  if (collapsed) {
+    return (
+      <aside className="sticky top-20 hidden w-10 shrink-0 lg:block">
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-label="Expand sidebar"
+          className="flex size-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-600 shadow-sm transition-colors hover:bg-neutral-50 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+          title="Expand"
+        >
+          <ChevronRight />
+        </button>
+      </aside>
+    );
+  }
 
   return (
     <aside className="sticky top-20 hidden h-[calc(100vh-6rem)] w-60 shrink-0 overflow-y-auto pr-2 lg:block">
+      {onToggle && (
+        <div className="mb-3 flex items-center justify-between px-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+            Menu
+          </span>
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-label="Collapse sidebar"
+            className="flex size-7 items-center justify-center rounded-md text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+            title="Collapse"
+          >
+            <ChevronLeft />
+          </button>
+        </div>
+      )}
       <nav className="flex flex-col gap-6 text-sm">
         {docsNav.map((section) => (
           <div key={section.title} className="flex flex-col gap-2">
@@ -23,7 +61,7 @@ export function DocsSidebar() {
                       <span className="block px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                         {entry.label}
                       </span>
-                      <ul className="flex flex-col border-l border-neutral-200 dark:border-neutral-800 ml-4">
+                      <ul className="ml-4 flex flex-col border-l border-neutral-200 dark:border-neutral-800">
                         {entry.items.map((sub) => (
                           <li key={sub.href}>
                             <SidebarLink item={sub} pathname={pathname} nested />
@@ -106,5 +144,21 @@ export function DocsMobileNav() {
         </select>
       </label>
     </div>
+  );
+}
+
+function ChevronLeft() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+  );
+}
+
+function ChevronRight() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
   );
 }
