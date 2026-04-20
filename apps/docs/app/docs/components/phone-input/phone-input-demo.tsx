@@ -9,7 +9,7 @@ export function PhoneInputDemo() {
   const [valid, setValid] = useState(false);
 
   return (
-    <section className="flex flex-col gap-3 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+    <section className="flex flex-col gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
       <div className="flex flex-col gap-1.5">
         <Label>Phone</Label>
         <PhoneInput

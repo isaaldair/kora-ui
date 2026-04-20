@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SignaturePad } from "kora-ui/client";
+import { SignaturePad, CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Signature pad",
@@ -25,7 +25,7 @@ export default function SignaturePadPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Preview
         </h2>
-        <div className="rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <SignaturePad width={480} height={180} />
         </div>
       </section>
@@ -34,16 +34,17 @@ export default function SignaturePadPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { SignaturePad } from "kora-ui/client";
+        <CodeBlock
+          code={`import { SignaturePad } from "kora-ui/client";
 
 <SignaturePad
   width={480}
   height={180}
   penColor="#0a0a0a"
   onChange={(dataUrl) => upload(dataUrl)}
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

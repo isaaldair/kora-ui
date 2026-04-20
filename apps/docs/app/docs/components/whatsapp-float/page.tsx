@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SiWhatsapp } from "react-icons/si";
-import { WhatsAppFloat } from "kora-ui/client";
+import { WhatsAppFloat, CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "WhatsApp float",
@@ -45,7 +45,7 @@ export default function WhatsAppFloatPage() {
         <p className="text-sm text-neutral-500">
           Click the bubble to open the contacts menu.
         </p>
-        <div className="relative grid h-72 place-items-center overflow-hidden rounded-xl border border-neutral-200 bg-white/40 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="relative grid h-72 place-items-center overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)]">
           <span className="text-xs uppercase tracking-wider text-neutral-400">
             Default — WhatsApp green (<code>#25d366</code>)
           </span>
@@ -63,8 +63,8 @@ export default function WhatsAppFloatPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Single contact
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { WhatsAppFloat } from "kora-ui/client";
+        <CodeBlock
+          code={`import { WhatsAppFloat } from "kora-ui/client";
 
 <WhatsAppFloat
   contact={{
@@ -72,16 +72,17 @@ export default function WhatsAppFloatPage() {
     phone: "+52 55 1234 5678",
     message: "Hola, me interesa un producto",
   }}
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Multiple contacts (branches)
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { WhatsAppFloat } from "kora-ui/client";
+        <CodeBlock
+          code={`import { WhatsAppFloat } from "kora-ui/client";
 
 <WhatsAppFloat
   menuTitle="Elige una sucursal"
@@ -90,8 +91,9 @@ export default function WhatsAppFloatPage() {
     { name: "Centro",  phone: "+52 55 1111 1111", label: "Av. Reforma 100" },
     { name: "Polanco", phone: "+52 55 2222 2222", label: "Masaryk 200" },
   ]}
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
 
       <section className="flex flex-col gap-4">
@@ -101,8 +103,8 @@ export default function WhatsAppFloatPage() {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           Any CSS color works — hex, rgb, hsl, named, or CSS variables from
           your palette (including the{" "}
-          <a className="underline underline-offset-4" href="/docs/palette">
-            electric palette
+          <a className="underline underline-offset-4" href="/docs/themes">
+            active theme
           </a>
           ). Each bubble below is a real <code>WhatsAppFloat</code> — click to
           open WhatsApp.
@@ -111,7 +113,7 @@ export default function WhatsAppFloatPage() {
           {swatches.map((s) => (
             <div
               key={s.name}
-              className="relative flex h-32 items-end justify-end overflow-hidden rounded-xl border border-neutral-200 bg-white/40 p-3 dark:border-neutral-800 dark:bg-neutral-950/40"
+              className="relative flex h-32 items-end justify-end overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-3"
             >
               <span className="absolute left-3 top-3 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
                 {s.name}
@@ -130,22 +132,23 @@ export default function WhatsAppFloatPage() {
             </div>
           ))}
         </div>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`<WhatsAppFloat
-  color="var(--color-electric-violet-600)"
+        <CodeBlock
+          code={`<WhatsAppFloat
+  color="var(--color-violet-600)"
   iconColor="#fff"
   contact={{ name: "Ventas", phone: "+52 55 1234 5678" }}
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Props
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+        <div className="overflow-x-auto rounded-xl border border-[var(--color-border)]">
           <table className="w-full text-left text-sm">
-            <thead className="bg-neutral-50 text-neutral-500 dark:bg-neutral-900">
+            <thead className="bg-[var(--color-background-secondary)] text-neutral-500">
               <tr>
                 <th className="px-4 py-3 font-medium">Prop</th>
                 <th className="px-4 py-3 font-medium">Type</th>
@@ -175,14 +178,14 @@ export default function WhatsAppFloatPage() {
 
 const swatches = [
   { name: "WhatsApp", color: "#25d366" },
-  { name: "Electric blue", color: "var(--color-electric-blue-500)" },
-  { name: "Electric violet", color: "var(--color-electric-violet-600)" },
-  { name: "Electric lime", color: "var(--color-electric-lime-400)", iconColor: "#0a0a0a" },
+  { name: "Theme blue", color: "var(--color-blue-500)" },
+  { name: "Theme violet", color: "var(--color-violet-600)" },
+  { name: "Theme lime", color: "var(--color-lime-400)", iconColor: "#0a0a0a" },
 ];
 
 function Prop({ name, type, def = "—" }: { name: string; type: string; def?: string }) {
   return (
-    <tr className="border-t border-neutral-200 dark:border-neutral-800">
+    <tr className="border-t border-[var(--color-border)]">
       <td className="px-4 py-3 font-mono text-xs">{name}</td>
       <td className="px-4 py-3 font-mono text-xs">{type}</td>
       <td className="px-4 py-3 font-mono text-xs">{def}</td>

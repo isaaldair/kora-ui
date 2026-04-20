@@ -36,14 +36,21 @@ export default {
 } satisfies Config;
 ```
 
-Optionally import the electric palette once to enable every `bg-electric-*`,
-`text-electric-*`, `border-electric-*`, and `ring-electric-*` utility:
+Import the themes stylesheet to unlock six swappable themes (default, vintage,
+futuristic, electric, oceanic, botanical). Activate one with a single attribute:
 
 ```css
 /* app/globals.css */
 @import "tailwindcss";
-@import "kora-ui/styles/electric.css";
+@import "kora-ui/styles/themes.css";
 ```
+
+```html
+<html data-theme="vintage">
+```
+
+`default` follows the user's system light/dark preference; the other five ship
+fixed palettes and Google Fonts loaded on demand.
 
 ## Usage
 
@@ -108,18 +115,29 @@ import { WhatsAppFloat } from "kora-ui/client";
 />
 ```
 
-## Electric palette
+## Themes
 
-17 Tailwind hues × 11 shades, pushed to 100% saturation — neon-adjacent color
-tokens that hold legibility in both light and dark surfaces.
+Six complete design systems in one stylesheet. Each theme carries its own
+semantic tokens, typography, radius and shadow scales; the five opinionated
+ones also override the full 22-hue × 11-shade Tailwind palette.
+
+| Theme       | Vibe                                     |
+| ----------- | ---------------------------------------- |
+| default     | Tailwind stock, follows OS light/dark    |
+| vintage     | Warm, nostalgic, editorial serif         |
+| futuristic  | Cyberpunk neon on deep blue-violet black |
+| electric    | Modern dopamine on clean whites          |
+| oceanic     | Calm teal for wellness & climate-tech    |
+| botanical   | Earthy greens, organic & grounded        |
 
 ```tsx
-<button className="bg-electric-blue-500 text-electric-blue-50 hover:bg-electric-blue-600">
+<button className="bg-blue-500 text-blue-50 hover:bg-blue-600">
   Deploy
 </button>
 ```
 
-Preview every shade at [kora-ui.istmocode.com/docs/palette](https://kora-ui.istmocode.com/docs/palette).
+Same utility, different look per theme. Preview every theme at
+[kora-ui.istmocode.com/docs/themes](https://kora-ui.istmocode.com/docs/themes).
 
 ## Docs
 

@@ -70,7 +70,7 @@ export function Rating({
       tabIndex={readOnly ? -1 : 0}
       onKeyDown={handleKey}
       onMouseLeave={() => setHover(null)}
-      className={`inline-flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
+      className={`inline-flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] ${className}`}
     >
       {Array.from({ length: max }, (_, i) => {
         const starIndex = i + 1;
@@ -151,7 +151,7 @@ function StarButton({
         width={size}
         height={size}
         viewBox="0 0 24 24"
-        className="absolute inset-0 text-neutral-300 dark:text-neutral-700"
+        className="absolute inset-0 text-[var(--color-border-strong)]"
       >
         <path
           fill="currentColor"

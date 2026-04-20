@@ -21,14 +21,14 @@ export function JsonViewer({
   return (
     <div
       className={[
-        "overflow-auto rounded-xl border border-neutral-200 bg-white p-4 font-mono text-sm leading-relaxed dark:border-neutral-800 dark:bg-neutral-950",
+        "overflow-auto rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-4 font-mono text-sm leading-relaxed",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
       {rootLabel && (
-        <div className="mb-2 text-xs uppercase tracking-wider text-neutral-500">
+        <div className="mb-2 text-xs uppercase tracking-wider text-[var(--color-foreground-subtle)]">
           {rootLabel}
         </div>
       )}
@@ -75,15 +75,15 @@ function Node({
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="mr-1 inline-flex size-4 items-center justify-center rounded text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-900"
+          className="mr-1 inline-flex size-4 items-center justify-center rounded text-[var(--color-foreground-subtle)] hover:bg-[var(--color-background-secondary)]"
           aria-label={open ? "Collapse" : "Expand"}
         >
           <span className="text-[10px]">{open ? "▾" : "▸"}</span>
         </button>
         {name !== undefined && <Key>{name}:</Key>}
-        <span className="text-neutral-500">{bracketOpen}</span>
+        <span className="text-[var(--color-foreground-subtle)]">{bracketOpen}</span>
         {!open && (
-          <span className="ml-1 text-neutral-400">
+          <span className="ml-1 text-[var(--color-foreground-subtle)]">
             {entries.length} {entries.length === 1 ? "item" : "items"}
             <span className="ml-1">{bracketClose}</span>
           </span>
@@ -101,7 +101,7 @@ function Node({
             />
           ))}
           <Line depth={depth}>
-            <span className="text-neutral-500">{bracketClose}</span>
+            <span className="text-[var(--color-foreground-subtle)]">{bracketClose}</span>
           </Line>
         </>
       )}
@@ -121,11 +121,11 @@ function Line({ depth, children }: { depth: number; children: ReactNode }) {
 }
 
 function Key({ children }: { children: ReactNode }) {
-  return <span className="text-neutral-700 dark:text-neutral-300">{children}</span>;
+  return <span className="text-[var(--color-foreground)]">{children}</span>;
 }
 
 function Primitive({ value }: { value: unknown }) {
-  if (value === null) return <span className="text-neutral-400">null</span>;
+  if (value === null) return <span className="text-[var(--color-foreground-subtle)]">null</span>;
   if (typeof value === "string")
     return <span className="text-green-700 dark:text-green-400">"{value}"</span>;
   if (typeof value === "number")
@@ -137,6 +137,6 @@ function Primitive({ value }: { value: unknown }) {
       </span>
     );
   if (typeof value === "undefined")
-    return <span className="text-neutral-400">undefined</span>;
+    return <span className="text-[var(--color-foreground-subtle)]">undefined</span>;
   return <span>{String(value)}</span>;
 }

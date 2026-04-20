@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CodeBlock } from "kora-ui/client";
 import { DatePickerDemo } from "./date-picker-demo";
 
 export const metadata: Metadata = {
@@ -36,14 +37,15 @@ export default function DatePickerPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { DatePicker } from "kora-ui/client";
+        <CodeBlock
+          code={`import { DatePicker } from "kora-ui/client";
 
 const [date, setDate] = useState<Date>();
 
 <DatePicker mode="single" selected={date} onSelect={setDate} />
-<DatePicker mode="range" selected={range} onSelect={setRange} />`}</code>
-        </pre>
+<DatePicker mode="range" selected={range} onSelect={setRange} />`}
+          language="tsx"
+        />
       </section>
     </article>
   );

@@ -8,6 +8,7 @@ import {
   CardFooter,
   Button,
 } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Card",
@@ -33,7 +34,7 @@ export default function CardPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Preview
         </h2>
-        <div className="rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <Card className="max-w-md">
             <CardHeader>
               <CardTitle>Deploy to production</CardTitle>
@@ -59,8 +60,8 @@ export default function CardPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import {
+        <CodeBlock
+          code={`import {
   Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
 } from "kora-ui";
 
@@ -71,8 +72,9 @@ export default function CardPage() {
   </CardHeader>
   <CardContent>Body</CardContent>
   <CardFooter>Actions</CardFooter>
-</Card>`}</code>
-        </pre>
+</Card>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

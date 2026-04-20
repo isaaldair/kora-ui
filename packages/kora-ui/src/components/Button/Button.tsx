@@ -32,14 +32,14 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-neutral-900 text-white hover:bg-neutral-800 focus-visible:ring-neutral-900 " +
-    "dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 dark:focus-visible:ring-white",
+    "bg-[var(--color-accent)] text-[var(--color-accent-foreground)] hover:bg-[var(--color-accent-hover)] " +
+    "focus-visible:ring-[var(--color-accent)]",
   secondary:
-    "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus-visible:ring-neutral-400 " +
-    "dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-800",
+    "bg-[var(--color-background-secondary)] text-[var(--color-foreground)] hover:bg-[var(--color-background-tertiary)] " +
+    "border border-[var(--color-border)] focus-visible:ring-[var(--color-border-strong)]",
   ghost:
-    "bg-transparent text-neutral-900 hover:bg-neutral-100 focus-visible:ring-neutral-400 " +
-    "dark:text-neutral-100 dark:hover:bg-neutral-900",
+    "bg-transparent text-[var(--color-foreground)] hover:bg-[var(--color-background-secondary)] " +
+    "focus-visible:ring-[var(--color-border-strong)]",
 };
 
 const sizes: Record<ButtonSize, string> = {

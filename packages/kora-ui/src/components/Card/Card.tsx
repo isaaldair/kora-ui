@@ -5,8 +5,8 @@ export const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={[
-        "rounded-xl border border-neutral-200 bg-white text-neutral-900 shadow-sm",
-        "dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100",
+        "rounded-xl border shadow-sm",
+        "border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-foreground)]",
         className,
       ]
         .filter(Boolean)
@@ -55,7 +55,7 @@ export const CardDescription = forwardRef<
   <p
     ref={ref}
     className={[
-      "text-sm text-neutral-600 dark:text-neutral-400",
+      "text-sm text-[var(--color-foreground-muted)]",
       className,
     ]
       .filter(Boolean)

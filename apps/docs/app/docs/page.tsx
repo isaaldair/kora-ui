@@ -16,14 +16,14 @@ export default function IntroPage() {
         <h1 className="text-4xl font-semibold tracking-tight">Introduction</h1>
         <p className="max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
           kora-ui is a TypeScript-first React component library styled entirely
-          with Tailwind CSS. It ships unopinionated primitives plus an{" "}
+          with Tailwind CSS. It ships unopinionated primitives plus{" "}
           <Link
-            href="/docs/palette"
+            href="/docs/themes"
             className="font-medium text-neutral-900 underline underline-offset-4 dark:text-neutral-100"
           >
-            electric color palette
+            six swappable themes
           </Link>{" "}
-          that drops in on top of your Tailwind theme.
+          — activate one with a single <code>data-theme</code> attribute.
         </p>
       </header>
 
@@ -33,7 +33,7 @@ export default function IntroPage() {
           {principles.map((p) => (
             <li
               key={p.title}
-              className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800"
+              className="rounded-xl border border-[var(--color-border)] p-5"
             >
               <h3 className="text-sm font-semibold">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
@@ -54,10 +54,10 @@ export default function IntroPage() {
             body="Get kora-ui into your app and wire up Tailwind."
           />
           <NextCard
-            href="/docs/palette"
-            eyebrow="Design"
-            title="The electric palette"
-            body="17 hues × 11 shades of neon-adjacent color tokens."
+            href="/docs/themes"
+            eyebrow="Themes"
+            title="Six swappable themes"
+            body="Default (Tailwind stock) + vintage, futuristic, electric, oceanic, botanical."
           />
           <NextCard
             href="/docs/components/button"
@@ -107,7 +107,7 @@ function NextCard({
   external?: boolean;
 }) {
   const className =
-    "group flex flex-col gap-1.5 rounded-xl border border-neutral-200 p-5 transition-colors hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600";
+    "group flex flex-col gap-1.5 rounded-xl border border-[var(--color-border)] p-5 transition-colors hover:border-neutral-400 dark:hover:border-neutral-600";
   const content = (
     <>
       <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">

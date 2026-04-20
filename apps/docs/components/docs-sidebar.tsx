@@ -20,7 +20,7 @@ export function DocsSidebar({
           type="button"
           onClick={onToggle}
           aria-label="Expand sidebar"
-          className="flex size-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-600 shadow-sm transition-colors hover:bg-neutral-50 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+          className="flex size-9 items-center justify-center rounded-md border border-[var(--color-border)] bg-white text-neutral-600 shadow-sm transition-colors hover:bg-[var(--color-background-secondary)] hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
           title="Expand"
         >
           <ChevronRight />
@@ -61,7 +61,7 @@ export function DocsSidebar({
                       <span className="block px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                         {entry.label}
                       </span>
-                      <ul className="ml-4 flex flex-col border-l border-neutral-200 dark:border-neutral-800">
+                      <ul className="ml-4 flex flex-col border-l border-[var(--color-border)]">
                         {entry.items.map((sub) => (
                           <li key={sub.href}>
                             <SidebarLink item={sub} pathname={pathname} nested />
@@ -97,8 +97,8 @@ function SidebarLink({
   const active = pathname === item.href;
   const base = nested ? "ml-1 pl-3" : "px-3";
   const activeCls = active
-    ? "bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100"
-    : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100";
+    ? "bg-[var(--color-accent)] font-medium text-[var(--color-accent-foreground)]"
+    : "text-[var(--color-foreground-muted)] hover:bg-[var(--color-background-secondary)] hover:text-[var(--color-foreground)]";
   return (
     <Link
       href={item.href}
@@ -118,7 +118,7 @@ export function DocsMobileNav() {
           Navigate
         </span>
         <select
-          className="rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-950"
+          className="rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm"
           value={pathname}
           onChange={(e) => {
             if (typeof window !== "undefined") window.location.href = e.target.value;

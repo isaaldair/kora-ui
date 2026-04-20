@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Input, Label } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Input",
@@ -25,7 +26,7 @@ export default function InputPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Preview
         </h2>
-        <div className="grid gap-4 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40 sm:grid-cols-2">
+        <div className="grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="in-email">Email</Label>
             <Input
@@ -57,14 +58,15 @@ export default function InputPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Input, Label } from "kora-ui";
+        <CodeBlock
+          code={`import { Input, Label } from "kora-ui";
 
 <div className="flex flex-col gap-1.5">
   <Label htmlFor="email">Email</Label>
   <Input id="email" type="email" placeholder="you@example.com" />
-</div>`}</code>
-        </pre>
+</div>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

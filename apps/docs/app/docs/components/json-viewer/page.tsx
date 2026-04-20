@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JsonViewer } from "kora-ui/client";
+import { CodeBlock, JsonViewer } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "JSON viewer",
@@ -12,7 +12,7 @@ const sample = {
   stars: 0,
   features: ["tailwind", "typescript", "tree-shakable"],
   nested: {
-    palette: "electric",
+    palette: "default",
     hues: 17,
     shades: 11,
     total: 187,
@@ -50,12 +50,13 @@ export default function JsonViewerPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { JsonViewer } from "kora-ui/client";
+        <CodeBlock
+          code={`import { JsonViewer } from "kora-ui/client";
 
 <JsonViewer data={payload} />
-<JsonViewer data={payload} collapsedByDefault rootLabel="response" />`}</code>
-        </pre>
+<JsonViewer data={payload} collapsedByDefault rootLabel="response" />`}
+          language="tsx"
+        />
       </section>
     </article>
   );

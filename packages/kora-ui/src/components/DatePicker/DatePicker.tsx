@@ -16,7 +16,7 @@ export type DatePickerProps = DayPickerProps;
  */
 export function DatePicker(props: DatePickerProps) {
   return (
-    <div className="kora-datepicker inline-block rounded-xl border border-neutral-200 bg-white p-3 dark:border-neutral-800 dark:bg-neutral-950">
+    <div className="kora-datepicker inline-block rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-3">
       <DayPicker {...props} />
     </div>
   );

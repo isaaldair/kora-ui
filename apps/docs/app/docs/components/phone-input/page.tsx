@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CodeBlock } from "kora-ui/client";
 import { PhoneInputDemo } from "./phone-input-demo";
 
 export const metadata: Metadata = {
@@ -28,8 +29,8 @@ export default function PhoneInputPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { PhoneInput } from "kora-ui/client";
+        <CodeBlock
+          code={`import { PhoneInput } from "kora-ui/client";
 
 const [phone, setPhone] = useState("");
 const [valid, setValid] = useState(false);
@@ -41,8 +42,9 @@ const [valid, setValid] = useState(false);
     setPhone(e164);
     setValid(isValid);
   }}
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

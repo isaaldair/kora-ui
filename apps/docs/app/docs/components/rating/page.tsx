@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CodeBlock } from "kora-ui/client";
 import { RatingDemo } from "./rating-demo";
 
 export const metadata: Metadata = {
@@ -27,15 +28,16 @@ export default function RatingPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Rating } from "kora-ui/client";
+        <CodeBlock
+          code={`import { Rating } from "kora-ui/client";
 
 const [value, setValue] = useState(4);
 
 <Rating value={value} onChange={setValue} />
 <Rating value={3.5} step={0.5} readOnly />
-<Rating value={value} max={10} color="var(--color-electric-fuchsia-500)" />`}</code>
-        </pre>
+<Rating value={value} max={10} color="var(--color-fuchsia-500)" />`}
+          language="tsx"
+        />
       </section>
     </article>
   );

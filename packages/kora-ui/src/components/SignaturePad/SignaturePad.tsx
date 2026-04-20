@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import SignaturePadLib from "signature_pad";
 
 export interface SignaturePadProps {
-  /** Width of the canvas. Default: 480. */
+  /** Aspect ratio of the pad as `width / height`. Default: 480 / 180 (≈ 2.67). */
   width?: number;
-  /** Height of the canvas. Default: 180. */
+  /** See `width` — together they control the aspect ratio. Default: 180. */
   height?: number;
   /** Ink color. Default: `#0a0a0a`. */
   penColor?: string;
@@ -35,19 +35,50 @@ export function SignaturePad({
   const padRef = useRef<SignaturePadLib | null>(null);
   const [empty, setEmpty] = useState(true);
 
+  /* Resize the canvas backing store to match its CSS size × devicePixelRatio
+   * so the drawable surface covers the full visible area at crisp resolution.
+   * signature_pad reads canvas dimensions on construction, so we size first,
+   * then instantiate the pad. */
   useEffect(() => {
-    if (!canvasRef.current) return;
-    const pad = new SignaturePadLib(canvasRef.current, {
-      penColor,
-      backgroundColor,
-    });
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const sync = () => {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const rect = canvas.getBoundingClientRect();
+      const w = Math.max(1, Math.floor(rect.width));
+      const h = Math.max(1, Math.floor(rect.height));
+      canvas.width = w * ratio;
+      canvas.height = h * ratio;
+      const ctx = canvas.getContext("2d");
+      ctx?.scale(ratio, ratio);
+    };
+
+    sync();
+
+    const pad = new SignaturePadLib(canvas, { penColor, backgroundColor });
     padRef.current = pad;
+
     const onEnd = () => {
       setEmpty(pad.isEmpty());
       if (!pad.isEmpty()) onChange?.(pad.toDataURL("image/png"));
     };
     pad.addEventListener("endStroke", onEnd);
+
+    // Preserve existing strokes on resize by snapshotting + restoring.
+    let lastData = pad.toData();
+    const onResize = () => {
+      lastData = pad.toData();
+      sync();
+      pad.clear();
+      if (lastData.length) pad.fromData(lastData);
+      setEmpty(pad.isEmpty());
+    };
+    const observer = new ResizeObserver(onResize);
+    observer.observe(canvas);
+
     return () => {
+      observer.disconnect();
       pad.removeEventListener("endStroke", onEnd);
       pad.off();
     };
@@ -77,12 +108,13 @@ export function SignaturePad({
 
   return (
     <div className={`flex flex-col gap-3 ${className}`}>
-      <div className="rounded-xl border border-dashed border-neutral-300 bg-white p-1 dark:border-neutral-700 dark:bg-neutral-950">
+      <div
+        className="rounded-xl border border-dashed border-[var(--color-border-strong)] bg-[var(--color-background)] p-1"
+        style={{ aspectRatio: `${width} / ${height}` }}
+      >
         <canvas
           ref={canvasRef}
-          width={width}
-          height={height}
-          className="block touch-none rounded-lg"
+          className="block h-full w-full touch-none rounded-lg"
         />
       </div>
       {showControls && (
@@ -91,7 +123,7 @@ export function SignaturePad({
             type="button"
             onClick={clear}
             disabled={empty}
-            className="inline-flex h-8 items-center rounded-md border border-neutral-200 bg-white px-3 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:opacity-50 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300 dark:hover:bg-neutral-900"
+            className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-xs font-medium text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-background-secondary)] disabled:opacity-50"
           >
             Clear
           </button>
@@ -99,7 +131,7 @@ export function SignaturePad({
             type="button"
             onClick={download}
             disabled={empty}
-            className="inline-flex h-8 items-center rounded-md bg-neutral-900 px-3 text-xs font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+            className="inline-flex h-8 items-center rounded-md bg-[var(--color-accent)] px-3 text-xs font-medium text-[var(--color-accent-foreground)] transition-colors hover:bg-[var(--color-accent-hover)] disabled:opacity-50"
           >
             Download PNG
           </button>

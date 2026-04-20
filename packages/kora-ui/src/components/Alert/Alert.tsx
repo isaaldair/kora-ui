@@ -11,13 +11,13 @@ const base =
 
 const variants: Record<AlertVariant, string> = {
   info:
-    "border-neutral-200 bg-white text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100",
+    "border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-foreground)]",
   success:
-    "border-green-200 bg-green-50 text-green-900 dark:border-green-900 dark:bg-green-950/60 dark:text-green-100",
+    "border-green-300/60 bg-green-500/10 text-green-700",
   warning:
-    "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900 dark:bg-amber-950/60 dark:text-amber-100",
+    "border-amber-300/60 bg-amber-500/10 text-amber-700",
   destructive:
-    "border-red-200 bg-red-50 text-red-900 dark:border-red-900 dark:bg-red-950/60 dark:text-red-100",
+    "border-red-300/60 bg-red-500/10 text-red-700",
 };
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(

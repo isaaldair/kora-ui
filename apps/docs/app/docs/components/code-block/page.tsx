@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { CodeBlockDemo } from "./code-block-demo";
 import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Code block",
   description:
-    "Syntax-highlighted code via prism-react-renderer. Copyable, themeable, filename-aware.",
+    "Zero-dep syntax-highlighted code block. Shows the language, copies to clipboard, optionally editable.",
 };
 
-const example = `import { Button } from "kora-ui";
+const jsSnippet = `import { Button } from "kora-ui";
 
 export function SaveForm({ onSave }: { onSave: () => void }) {
+  // Submit handler fires on click
   return (
     <Button variant="primary" onClick={onSave}>
       Save changes
@@ -17,15 +19,26 @@ export function SaveForm({ onSave }: { onSave: () => void }) {
   );
 }`;
 
-const json = `{
+const jsonSnippet = `{
   "name": "kora-ui",
-  "version": "0.1.3",
+  "version": "0.4.0",
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
     "./client": "./dist/client.js"
   }
 }`;
+
+const cssSnippet = `.kora-button {
+  background: var(--accent);
+  color: var(--accent-fg);
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}`;
+
+const bashSnippet = `# install and build
+npm install kora-ui
+npm run build -w kora-ui --if-present`;
 
 export default function CodeBlockPage() {
   return (
@@ -36,41 +49,63 @@ export default function CodeBlockPage() {
         </span>
         <h1 className="text-4xl font-semibold tracking-tight">Code block</h1>
         <p className="max-w-2xl text-neutral-600 dark:text-neutral-400">
-          Drop-in syntax highlighting via{" "}
-          <a
-            className="font-medium underline underline-offset-4"
-            href="https://github.com/FormidableLabs/prism-react-renderer"
-            target="_blank"
-            rel="noreferrer"
-          >
-            prism-react-renderer
-          </a>
-          . Copy button included. Pass <code>filename</code>, override{" "}
-          <code>theme</code>, or wrap it in your own skin.
+          Syntax-highlighted code with a language pill, copy button, and an
+          opt-in <code>editable</code> mode. The tokenizer is written from
+          scratch (no external deps) and handles TS/TSX/JS/JSX, JSON, CSS,
+          HTML, and Bash.
         </p>
       </header>
 
       <section className="flex flex-col gap-4">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-          Preview
+          Static blocks
         </h2>
-        <CodeBlock code={example} language="tsx" filename="SaveForm.tsx" />
-        <CodeBlock code={json} language="json" filename="package.json" />
+        <CodeBlock code={jsSnippet} language="tsx" filename="SaveForm.tsx" />
+        <CodeBlock code={jsonSnippet} language="json" filename="package.json" />
+        <CodeBlock code={cssSnippet} language="css" filename="button.css" />
+        <CodeBlock code={bashSnippet} language="bash" filename="Terminal" />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+          Editable
+        </h2>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          Pass <code>editable</code> (or an <code>onCodeChange</code>
+          {" "}callback) and the block becomes a mini-editor — syntax stays
+          highlighted as you type. Tab inserts two spaces.
+        </p>
+        <CodeBlockDemo />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { CodeBlock } from "kora-ui/client";
+        <CodeBlock
+          language="tsx"
+          filename="usage.tsx"
+          code={`import { CodeBlock } from "kora-ui/client";
 
+// Read-only
 <CodeBlock
   code={\`const greet = () => "hello";\`}
   language="ts"
   filename="greet.ts"
-/>`}</code>
-        </pre>
+/>
+
+// Editable (controlled)
+const [code, setCode] = useState("const x = 1");
+
+<CodeBlock
+  code={code}
+  onCodeChange={setCode}
+  language="ts"
+/>
+
+// Editable (uncontrolled)
+<CodeBlock code={initial} editable language="ts" />`}
+        />
       </section>
     </article>
   );

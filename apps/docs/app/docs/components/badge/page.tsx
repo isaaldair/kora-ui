@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Badge } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Badge",
@@ -24,7 +25,7 @@ export default function BadgePage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Variants
         </h2>
-        <div className="flex flex-wrap items-center gap-3 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="flex flex-wrap items-center gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>
@@ -38,12 +39,13 @@ export default function BadgePage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Badge } from "kora-ui";
+        <CodeBlock
+          code={`import { Badge } from "kora-ui";
 
 <Badge variant="success">Active</Badge>
-<Badge variant="outline">Draft</Badge>`}</code>
-        </pre>
+<Badge variant="outline">Draft</Badge>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

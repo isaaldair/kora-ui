@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Separator } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Separator",
@@ -25,7 +26,7 @@ export default function SeparatorPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Horizontal
         </h2>
-        <div className="rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <p className="text-sm font-medium">Section heading</p>
           <Separator className="my-3" />
           <p className="text-sm text-neutral-600 dark:text-neutral-400">
@@ -38,7 +39,7 @@ export default function SeparatorPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Vertical
         </h2>
-        <div className="flex h-14 items-center gap-4 rounded-xl border border-neutral-200 bg-white/40 px-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="flex h-14 items-center gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] px-6">
           <span className="text-sm">Docs</span>
           <Separator orientation="vertical" />
           <span className="text-sm">Components</span>
@@ -51,12 +52,13 @@ export default function SeparatorPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Separator } from "kora-ui";
+        <CodeBlock
+          code={`import { Separator } from "kora-ui";
 
 <Separator />
-<Separator orientation="vertical" />`}</code>
-        </pre>
+<Separator orientation="vertical" />`}
+          language="tsx"
+        />
       </section>
     </article>
   );

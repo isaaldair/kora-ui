@@ -3,9 +3,8 @@ import { forwardRef, type LabelHTMLAttributes } from "react";
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
 
 const base =
-  "text-sm font-medium leading-none text-neutral-900 " +
-  "peer-disabled:cursor-not-allowed peer-disabled:opacity-50 " +
-  "dark:text-neutral-100";
+  "text-sm font-medium leading-none text-[var(--color-foreground)] " +
+  "peer-disabled:cursor-not-allowed peer-disabled:opacity-50";
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ className = "", ...rest }, ref) => (

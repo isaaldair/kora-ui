@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CodeBlock } from "kora-ui/client";
 import { InputMaskDemo } from "./input-mask-demo";
 
 export const metadata: Metadata = {
@@ -35,8 +36,8 @@ export default function InputMaskPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { InputMask } from "kora-ui/client";
+        <CodeBlock
+          code={`import { InputMask } from "kora-ui/client";
 
 <InputMask
   mask="0000 0000 0000 0000"
@@ -47,8 +48,9 @@ export default function InputMaskPage() {
 <InputMask
   mask={{ mask: Number, scale: 2, radix: "." }}
   placeholder="Amount"
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

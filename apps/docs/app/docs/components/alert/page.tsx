@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Alert, AlertTitle, AlertDescription } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Alert",
@@ -25,7 +26,7 @@ export default function AlertPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Variants
         </h2>
-        <div className="grid gap-3 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="grid gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <Alert>
             <AlertTitle>Heads up</AlertTitle>
             <AlertDescription>Default informational banner.</AlertDescription>
@@ -49,14 +50,15 @@ export default function AlertPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Alert, AlertTitle, AlertDescription } from "kora-ui";
+        <CodeBlock
+          code={`import { Alert, AlertTitle, AlertDescription } from "kora-ui";
 
 <Alert variant="success">
   <AlertTitle>Saved</AlertTitle>
   <AlertDescription>Your changes were saved.</AlertDescription>
-</Alert>`}</code>
-        </pre>
+</Alert>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

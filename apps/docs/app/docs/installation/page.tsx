@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Installation",
@@ -15,8 +16,8 @@ export default function InstallationPage() {
         </span>
         <h1 className="text-4xl font-semibold tracking-tight">Installation</h1>
         <p className="max-w-2xl text-neutral-600 dark:text-neutral-400">
-          kora-ui ships prebuilt ESM + CJS bundles. <code className="rounded bg-neutral-100 px-1.5 py-0.5 text-[0.9em] dark:bg-neutral-900">react</code>{" "}
-          and <code className="rounded bg-neutral-100 px-1.5 py-0.5 text-[0.9em] dark:bg-neutral-900">react-dom</code> are peer
+          kora-ui ships prebuilt ESM + CJS bundles. <code className="rounded bg-neutral-100 px-1.5 py-0.5 text-[0.9em]">react</code>{" "}
+          and <code className="rounded bg-neutral-100 px-1.5 py-0.5 text-[0.9em]">react-dom</code> are peer
           dependencies (React 18+).
         </p>
       </header>
@@ -26,11 +27,14 @@ export default function InstallationPage() {
         title="Install the package"
         description="Pick your package manager."
       >
-        <Code>{`npm install kora-ui
+        <CodeBlock
+          code={`npm install kora-ui
 # or
 pnpm add kora-ui
 # or
-yarn add kora-ui`}</Code>
+yarn add kora-ui`}
+          language="bash"
+        />
       </Step>
 
       <Step
@@ -38,7 +42,8 @@ yarn add kora-ui`}</Code>
         title="Expose kora-ui to Tailwind"
         description="Add kora-ui's built output to Tailwind's content array so its utility classes are scanned."
       >
-        <Code>{`// tailwind.config.ts
+        <CodeBlock
+          code={`// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 export default {
@@ -46,31 +51,44 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/kora-ui/dist/**/*.{js,mjs,cjs}",
   ],
-} satisfies Config;`}</Code>
+} satisfies Config;`}
+          language="ts"
+          filename="tailwind.config.ts"
+        />
       </Step>
 
       <Step
         n={3}
-        title="(Optional) Enable the electric palette"
-        description="Import the palette once — all `bg-electric-*`, `text-electric-*`, `border-electric-*`, and `ring-electric-*` utilities become available."
+        title="Enable themes"
+        description="Import the themes stylesheet once. Six themes become available (default, vintage, futuristic, electric, oceanic, botanical); switch by setting `data-theme` on `<html>`."
       >
-        <Code>{`/* app/globals.css */
+        <CodeBlock
+          code={`/* app/globals.css */
 @import "tailwindcss";
-@import "kora-ui/styles/electric.css";`}</Code>
+@import "kora-ui/styles/themes.css";`}
+          language="css"
+          filename="app/globals.css"
+        />
+        <CodeBlock
+          code={`<!-- Activate a theme (default follows system light/dark) -->
+<html data-theme="vintage">`}
+          language="html"
+        />
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          Preview all 187 tokens on the{" "}
+          Explore every theme on the{" "}
           <Link
-            href="/docs/palette"
+            href="/docs/themes"
             className="font-medium text-neutral-900 underline underline-offset-4 dark:text-neutral-100"
           >
-            palette page
+            themes page
           </Link>
           .
         </p>
       </Step>
 
       <Step n={4} title="Use a component" description="That's it. Import and render.">
-        <Code>{`import { Button } from "kora-ui";
+        <CodeBlock
+          code={`import { Button } from "kora-ui";
 
 export default function Example() {
   return (
@@ -79,7 +97,9 @@ export default function Example() {
       <Button variant="secondary">Cancel</Button>
     </div>
   );
-}`}</Code>
+}`}
+          language="tsx"
+        />
       </Step>
     </article>
   );
@@ -107,13 +127,5 @@ function Step({
       <p className="text-sm text-neutral-600 dark:text-neutral-400">{description}</p>
       <div className="flex flex-col gap-3">{children}</div>
     </section>
-  );
-}
-
-function Code({ children }: { children: string }) {
-  return (
-    <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-      <code>{children}</code>
-    </pre>
   );
 }

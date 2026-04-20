@@ -17,7 +17,7 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
     <span
       ref={ref}
       className={[
-        "relative inline-flex shrink-0 overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-900",
+        "relative inline-flex shrink-0 overflow-hidden rounded-full bg-[var(--color-background-secondary)]",
         sizes[size],
         className,
       ]
@@ -53,7 +53,7 @@ export const AvatarFallback = forwardRef<
   <span
     ref={ref}
     className={[
-      "flex h-full w-full items-center justify-center font-medium text-neutral-700 dark:text-neutral-300",
+      "flex h-full w-full items-center justify-center font-medium text-[var(--color-foreground-muted)]",
       className,
     ]
       .filter(Boolean)

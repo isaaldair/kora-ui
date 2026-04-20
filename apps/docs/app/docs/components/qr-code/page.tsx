@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { QRCode } from "kora-ui/client";
+import { QRCode, CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "QR code",
@@ -26,7 +26,7 @@ export default function QRCodePage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Preview
         </h2>
-        <div className="grid gap-6 rounded-xl border border-neutral-200 bg-white/40 p-6 sm:grid-cols-3 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="grid gap-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6 sm:grid-cols-3">
           <Cell title="Default">
             <QRCode value="https://kora-ui.istmocode.com" size={160} />
           </Cell>
@@ -34,8 +34,8 @@ export default function QRCodePage() {
             <QRCode
               value="https://kora-ui.istmocode.com"
               size={160}
-              color="var(--color-electric-violet-600)"
-              backgroundColor="var(--color-electric-violet-50)"
+              color="var(--color-violet-600)"
+              backgroundColor="var(--color-violet-50)"
             />
           </Cell>
           <Cell title="High correction">
@@ -52,8 +52,8 @@ export default function QRCodePage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { QRCode } from "kora-ui/client";
+        <CodeBlock
+          code={`import { QRCode } from "kora-ui/client";
 
 <QRCode value="https://kora-ui.istmocode.com" size={192} />
 
@@ -62,8 +62,9 @@ export default function QRCodePage() {
   color="#0a0a0a"
   backgroundColor="#fff"
   errorCorrection="H"
-/>`}</code>
-        </pre>
+/>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

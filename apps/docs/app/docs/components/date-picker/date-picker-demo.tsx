@@ -9,7 +9,7 @@ export function DatePickerDemo() {
   const [range, setRange] = useState<DateRange | undefined>();
 
   return (
-    <section className="grid gap-6 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40 md:grid-cols-2">
+    <section className="grid gap-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6 md:grid-cols-2">
       <div className="flex flex-col gap-3">
         <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">
           Single

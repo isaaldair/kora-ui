@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type VideoHTMLAttributes,
@@ -10,13 +11,61 @@ import {
 
 export interface VideoPlayerProps
   extends Omit<VideoHTMLAttributes<HTMLVideoElement>, "controls"> {
-  /** Video source URL. */
+  /** Video source URL. Supports direct media files (mp4, webm) and YouTube URLs. */
   src: string;
-  /** Optional poster image. */
+  /** Optional poster image. Falls back to YouTube's maxres thumbnail for YouTube URLs. */
   poster?: string;
-  /** Accent color for progress/volume. Default: `var(--accent, #2563eb)`. */
+  /** Accent color for progress/volume (native player only). Default: theme accent. */
   accent?: string;
+  /** Autoplay on first click. Default: true. For YouTube, starts the embed on click. */
+  autoplayOnClick?: boolean;
   className?: string;
+}
+
+type YouTubeInfo = { id: string; list?: string; start?: number };
+
+function parseYouTube(url: string): YouTubeInfo | null {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    const list = u.searchParams.get("list") ?? undefined;
+    const start = u.searchParams.get("t") ?? u.searchParams.get("start");
+    const startSec = start
+      ? parseInt(start.replace(/[^\d]/g, ""), 10) || undefined
+      : undefined;
+    if (host === "youtu.be") {
+      return { id: u.pathname.slice(1), list, start: startSec };
+    }
+    if (host === "youtube.com" || host === "m.youtube.com") {
+      if (u.pathname === "/watch") {
+        const id = u.searchParams.get("v");
+        return id ? { id, list, start: startSec } : null;
+      }
+      if (u.pathname.startsWith("/embed/")) {
+        return { id: u.pathname.slice(7), list, start: startSec };
+      }
+      if (u.pathname.startsWith("/shorts/")) {
+        return { id: u.pathname.slice(8), list, start: startSec };
+      }
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function youTubeThumbnail(id: string) {
+  return `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+}
+
+function youTubeEmbedUrl(info: YouTubeInfo, autoplay: boolean) {
+  const params = new URLSearchParams();
+  params.set("autoplay", autoplay ? "1" : "0");
+  params.set("rel", "0");
+  params.set("modestbranding", "1");
+  if (info.list) params.set("list", info.list);
+  if (info.start) params.set("start", String(info.start));
+  return `https://www.youtube.com/embed/${info.id}?${params.toString()}`;
 }
 
 function formatTime(seconds: number) {
@@ -31,10 +80,106 @@ function formatTime(seconds: number) {
 export function VideoPlayer({
   src,
   poster,
-  accent = "var(--accent, #2563eb)",
+  accent = "var(--color-accent, #2563eb)",
+  autoplayOnClick = true,
   className = "",
   ...videoProps
 }: VideoPlayerProps) {
+  const youtube = useMemo(() => parseYouTube(src), [src]);
+  if (youtube) {
+    return (
+      <YouTubePlayer
+        info={youtube}
+        poster={poster ?? youTubeThumbnail(youtube.id)}
+        autoplayOnClick={autoplayOnClick}
+        className={className}
+      />
+    );
+  }
+  return (
+    <NativeVideoPlayer
+      src={src}
+      poster={poster}
+      accent={accent}
+      className={className}
+      videoProps={videoProps}
+    />
+  );
+}
+
+function YouTubePlayer({
+  info,
+  poster,
+  autoplayOnClick,
+  className,
+}: {
+  info: YouTubeInfo;
+  poster: string;
+  autoplayOnClick: boolean;
+  className: string;
+}) {
+  const [activated, setActivated] = useState(false);
+  const embedUrl = useMemo(
+    () => youTubeEmbedUrl(info, autoplayOnClick),
+    [info, autoplayOnClick],
+  );
+
+  return (
+    <div
+      className={`group relative overflow-hidden rounded-xl bg-black ${className}`}
+    >
+      {activated ? (
+        <iframe
+          src={embedUrl}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="block h-full w-full"
+          style={{ border: 0 }}
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setActivated(true)}
+          aria-label="Play video"
+          className="group/play block h-full w-full"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={poster}
+            alt=""
+            className="block h-full w-full object-cover"
+            loading="lazy"
+          />
+          <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover/play:bg-black/30">
+            <span className="flex size-16 items-center justify-center rounded-full bg-white/90 text-neutral-900 shadow-xl transition-transform group-hover/play:scale-105">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+          </span>
+          <span className="absolute bottom-3 left-3 rounded-md bg-black/60 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+            YouTube
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
+function NativeVideoPlayer({
+  src,
+  poster,
+  accent,
+  className,
+  videoProps,
+}: {
+  src: string;
+  poster: string | undefined;
+  accent: string;
+  className: string;
+  videoProps: Omit<VideoHTMLAttributes<HTMLVideoElement>, "controls" | "src" | "poster">;
+}) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);

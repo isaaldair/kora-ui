@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ConfettiButton } from "kora-ui/client";
+import { CodeBlock, ConfettiButton } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Confetti button",
@@ -25,7 +25,7 @@ export default function ConfettiButtonPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Try it
         </h2>
-        <div className="flex flex-wrap items-center gap-3 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="flex flex-wrap items-center gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <ConfettiButton confettiOrigin="around" variant="primary">
             Around
           </ConfettiButton>
@@ -36,9 +36,9 @@ export default function ConfettiButtonPage() {
           <ConfettiButton
             confettiOrigin="page"
             colors={[
-              "var(--color-electric-pink-500)",
-              "var(--color-electric-fuchsia-500)",
-              "var(--color-electric-violet-500)",
+              "var(--color-pink-500)",
+              "var(--color-fuchsia-500)",
+              "var(--color-violet-500)",
             ]}
             particleCount={180}
             variant="ghost"
@@ -52,8 +52,8 @@ export default function ConfettiButtonPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { ConfettiButton } from "kora-ui/client";
+        <CodeBlock
+          code={`import { ConfettiButton } from "kora-ui/client";
 
 <ConfettiButton confettiOrigin="around" variant="primary">
   Celebrate
@@ -65,17 +65,18 @@ export default function ConfettiButtonPage() {
   particleCount={200}
 >
   Launch
-</ConfettiButton>`}</code>
-        </pre>
+</ConfettiButton>`}
+          language="tsx"
+        />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Props
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+        <div className="overflow-x-auto rounded-xl border border-[var(--color-border)]">
           <table className="w-full text-left text-sm">
-            <thead className="bg-neutral-50 text-neutral-500 dark:bg-neutral-900">
+            <thead className="bg-[var(--color-background-secondary)] text-neutral-500">
               <tr>
                 <th className="px-4 py-3 font-medium">Prop</th>
                 <th className="px-4 py-3 font-medium">Type</th>
@@ -83,29 +84,29 @@ export default function ConfettiButtonPage() {
               </tr>
             </thead>
             <tbody className="text-neutral-700 dark:text-neutral-300">
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
+              <tr className="border-t border-[var(--color-border)]">
                 <td className="px-4 py-3 font-mono text-xs">confettiOrigin</td>
                 <td className="px-4 py-3 font-mono text-xs">
                   "around" | "inside" | "page"
                 </td>
                 <td className="px-4 py-3 font-mono text-xs">"page"</td>
               </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
+              <tr className="border-t border-[var(--color-border)]">
                 <td className="px-4 py-3 font-mono text-xs">particleCount</td>
                 <td className="px-4 py-3 font-mono text-xs">number</td>
                 <td className="px-4 py-3 font-mono text-xs">120</td>
               </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
+              <tr className="border-t border-[var(--color-border)]">
                 <td className="px-4 py-3 font-mono text-xs">spread</td>
                 <td className="px-4 py-3 font-mono text-xs">number</td>
                 <td className="px-4 py-3 font-mono text-xs">70</td>
               </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
+              <tr className="border-t border-[var(--color-border)]">
                 <td className="px-4 py-3 font-mono text-xs">colors</td>
                 <td className="px-4 py-3 font-mono text-xs">string[]</td>
                 <td className="px-4 py-3 font-mono text-xs">vibrant mix</td>
               </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
+              <tr className="border-t border-[var(--color-border)]">
                 <td className="px-4 py-3 font-mono text-xs">...Button</td>
                 <td className="px-4 py-3 font-mono text-xs">ButtonProps</td>
                 <td className="px-4 py-3 font-mono text-xs">—</td>

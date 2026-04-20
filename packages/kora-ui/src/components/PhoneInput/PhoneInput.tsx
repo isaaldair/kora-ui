@@ -104,14 +104,14 @@ export function PhoneInput({
   return (
     <div
       className={[
-        "flex items-stretch overflow-hidden rounded-md border border-neutral-200 bg-white transition-colors focus-within:ring-2 focus-within:ring-neutral-900 focus-within:ring-offset-2 dark:border-neutral-800 dark:bg-neutral-950 dark:focus-within:ring-white",
+        "flex items-stretch overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-background)] transition-colors focus-within:ring-2 focus-within:ring-[var(--color-accent)] focus-within:ring-offset-2 focus-within:ring-offset-[var(--color-background)]",
         disabled ? "opacity-50" : "",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <div className="flex items-center gap-1 border-r border-neutral-200 bg-neutral-50 pl-2 pr-1 text-sm dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="flex items-center gap-1 border-r border-[var(--color-border)] bg-[var(--color-background-secondary)] pl-2 pr-1 text-sm">
         <span className="text-lg leading-none" aria-hidden="true">
           {countryFlag(country)}
         </span>
@@ -120,7 +120,7 @@ export function PhoneInput({
           onChange={handleCountry}
           disabled={disabled}
           aria-label="Country"
-          className="appearance-none bg-transparent py-2 pr-5 text-sm text-neutral-700 outline-none dark:text-neutral-300"
+          className="appearance-none bg-transparent py-2 pr-5 text-sm text-[var(--color-foreground)] outline-none"
         >
           {countries.map((c) => (
             <option key={c} value={c}>
@@ -135,7 +135,7 @@ export function PhoneInput({
         onChange={handleChange}
         placeholder={placeholder}
         disabled={disabled}
-        className="flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+        className="flex-1 bg-transparent px-3 py-2 text-sm text-[var(--color-foreground)] outline-none placeholder:text-[var(--color-foreground-subtle)]"
         aria-invalid={local && !valid ? true : undefined}
       />
     </div>

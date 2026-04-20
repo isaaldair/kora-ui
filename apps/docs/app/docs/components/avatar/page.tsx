@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Avatar, AvatarImage, AvatarFallback } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Avatar",
@@ -25,7 +26,7 @@ export default function AvatarPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Sizes
         </h2>
-        <div className="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="flex items-center gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <Avatar size="sm">
             <AvatarFallback>IA</AvatarFallback>
           </Avatar>
@@ -49,14 +50,15 @@ export default function AvatarPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Avatar, AvatarImage, AvatarFallback } from "kora-ui";
+        <CodeBlock
+          code={`import { Avatar, AvatarImage, AvatarFallback } from "kora-ui";
 
 <Avatar>
   <AvatarImage src="/me.jpg" alt="Isaac" />
   <AvatarFallback>IA</AvatarFallback>
-</Avatar>`}</code>
-        </pre>
+</Avatar>`}
+          language="tsx"
+        />
       </section>
     </article>
   );

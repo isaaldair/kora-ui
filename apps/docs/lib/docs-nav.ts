@@ -28,9 +28,9 @@ export const docsNav: DocsNavSection[] = [
     ],
   },
   {
-    title: "Design",
+    title: "Themes",
     items: [
-      { label: "Electric palette", href: "/docs/palette" },
+      { label: "Overview", href: "/docs/themes" },
     ],
   },
   {

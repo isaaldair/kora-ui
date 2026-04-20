@@ -119,9 +119,9 @@ export function WhatsAppFloat({
       {open && isMulti && (
         <div
           role="menu"
-          className="w-72 rounded-xl border border-neutral-200 bg-white p-2 shadow-xl dark:border-neutral-800 dark:bg-neutral-950"
+          className="w-72 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-xl"
         >
-          <h4 className="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+          <h4 className="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-foreground-subtle)]">
             {menuTitle}
           </h4>
           <ul className="mt-1 flex flex-col">
@@ -131,13 +131,13 @@ export function WhatsAppFloat({
                   type="button"
                   role="menuitem"
                   onClick={() => openChat(c)}
-                  className="flex w-full flex-col items-start rounded-md p-2 text-left transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:bg-neutral-100 dark:hover:bg-neutral-900 dark:focus-visible:bg-neutral-900"
+                  className="flex w-full flex-col items-start rounded-md p-2 text-left transition-colors hover:bg-[var(--color-background-secondary)] focus-visible:outline-none focus-visible:bg-[var(--color-background-secondary)]"
                 >
-                  <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                  <span className="text-sm font-medium text-[var(--color-foreground)]">
                     {c.name}
                   </span>
                   {c.label && (
-                    <span className="text-xs text-neutral-500">{c.label}</span>
+                    <span className="text-xs text-[var(--color-foreground-subtle)]">{c.label}</span>
                   )}
                 </button>
               </li>
@@ -152,7 +152,7 @@ export function WhatsAppFloat({
         aria-label={ariaLabel}
         aria-expanded={isMulti ? open : undefined}
         style={{ backgroundColor: color, color: iconColor }}
-        className="flex size-14 items-center justify-center rounded-full shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-950"
+        className="flex size-14 items-center justify-center rounded-full shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
       >
         {icon ?? <SiWhatsapp size={26} />}
       </button>

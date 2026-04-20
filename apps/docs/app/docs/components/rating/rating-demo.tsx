@@ -8,7 +8,7 @@ export function RatingDemo() {
   const [half, setHalf] = useState(3.5);
 
   return (
-    <section className="flex flex-col gap-6 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+    <section className="flex flex-col gap-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
       <Row label="Default">
         <Rating value={value} onChange={setValue} />
         <span className="text-sm text-neutral-500">value: {value}</span>
@@ -21,7 +21,7 @@ export function RatingDemo() {
         <Rating
           value={5}
           onChange={() => {}}
-          color="var(--color-electric-fuchsia-500)"
+          color="var(--color-fuchsia-500)"
         />
       </Row>
       <Row label="Max 10">

@@ -18,17 +18,14 @@ const base =
 
 const variants: Record<BadgeVariant, string> = {
   default:
-    "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900",
+    "bg-[var(--color-accent)] text-[var(--color-accent-foreground)]",
   secondary:
-    "bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100",
+    "bg-[var(--color-background-secondary)] text-[var(--color-foreground)]",
   outline:
-    "border border-neutral-200 text-neutral-900 dark:border-neutral-800 dark:text-neutral-100",
-  success:
-    "bg-green-100 text-green-900 dark:bg-green-950 dark:text-green-200",
-  warning:
-    "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200",
-  destructive:
-    "bg-red-100 text-red-900 dark:bg-red-950 dark:text-red-200",
+    "border border-[var(--color-border)] text-[var(--color-foreground)]",
+  success: "bg-green-500/15 text-green-700",
+  warning: "bg-amber-500/15 text-amber-700",
+  destructive: "bg-red-500/15 text-red-700",
 };
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(

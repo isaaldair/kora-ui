@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Textarea, Label } from "kora-ui";
+import { CodeBlock } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "Textarea",
@@ -24,7 +25,7 @@ export default function TextareaPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Preview
         </h2>
-        <div className="flex flex-col gap-1.5 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40">
+        <div className="flex flex-col gap-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6">
           <Label htmlFor="ta-msg">Message</Label>
           <Textarea
             id="ta-msg"
@@ -38,12 +39,13 @@ export default function TextareaPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Usage
         </h2>
-        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <code>{`import { Textarea, Label } from "kora-ui";
+        <CodeBlock
+          code={`import { Textarea, Label } from "kora-ui";
 
 <Label htmlFor="bio">Bio</Label>
-<Textarea id="bio" rows={4} placeholder="Tell us about yourself" />`}</code>
-        </pre>
+<Textarea id="bio" rows={4} placeholder="Tell us about yourself" />`}
+          language="tsx"
+        />
       </section>
     </article>
   );

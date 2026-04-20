@@ -10,7 +10,7 @@ export function InputMaskDemo() {
   const [date, setDate] = useState("");
 
   return (
-    <section className="grid gap-4 rounded-xl border border-neutral-200 bg-white/40 p-6 dark:border-neutral-800 dark:bg-neutral-950/40 sm:grid-cols-2">
+    <section className="grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background-secondary)] p-6 sm:grid-cols-2">
       <div className="flex flex-col gap-1.5">
         <Label>Credit card</Label>
         <InputMask

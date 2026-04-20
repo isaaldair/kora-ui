@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Geist, Geist_Mono, DM_Serif_Display } from "next/font/google";
 import { SiNpm, SiGithub } from "react-icons/si";
 import { Button } from "kora-ui";
 import "./globals.css";
-import { ThemeControls } from "@/components/theme-controls";
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const dmSerif = DM_Serif_Display({
-  variable: "--font-dm-serif-display",
-  subsets: ["latin"],
-  weight: "400",
-});
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export const metadata: Metadata = {
   title: {
@@ -20,17 +11,21 @@ export const metadata: Metadata = {
     template: "%s — kora-ui",
   },
   description:
-    "A TypeScript-first React UI component library styled with Tailwind CSS. Ships an electric color palette.",
+    "A TypeScript-first React UI component library styled with Tailwind CSS. Ships 6 swappable themes (default, vintage, futuristic, electric, oceanic, botanical).",
   metadataBase: new URL("https://kora-ui.istmocode.com"),
   openGraph: {
     title: "kora-ui",
-    description: "React + Tailwind component library.",
+    description: "React + Tailwind component library with swappable themes.",
     type: "website",
   },
 };
 
 const PAYPAL_URL =
   "https://www.paypal.com/donate/?hosted_button_id=N46Z7WUY5T3AQ";
+
+/* Hydrates the stored theme before React mounts, preventing a flash of the
+ * default theme on navigation. Safe inline script — pure DOM, no deps. */
+const themeInit = `(()=>{try{var t=localStorage.getItem("kora-theme")||"default";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","default");}})();`;
 
 export default function RootLayout({
   children,
@@ -40,15 +35,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-accent="blue"
-      data-k-style="basic"
-      className={`${geistSans.variable} ${geistMono.variable} ${dmSerif.variable} antialiased`}
+      data-theme="default"
+      className="antialiased"
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body className="flex min-h-screen flex-col">
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />
-        <ThemeControls />
+        <ThemeSwitcher />
       </body>
     </html>
   );
@@ -56,22 +54,30 @@ export default function RootLayout({
 
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b border-neutral-200/60 bg-white/70 backdrop-blur dark:border-neutral-800/60 dark:bg-black/60">
+    <header
+      className="sticky top-0 z-10 border-b backdrop-blur"
+      style={{
+        borderColor: "var(--color-border)",
+        backgroundColor: "color-mix(in oklab, var(--color-background) 70%, transparent)",
+      }}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
         <Link href="/" className="text-sm font-semibold tracking-tight">
-          kora<span className="text-neutral-400">-ui</span>
+          kora<span style={{ color: "var(--color-foreground-subtle)" }}>-ui</span>
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/"
-            className="rounded-md px-2 py-1 text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="rounded-md px-2 py-1 text-sm transition-colors"
+            style={{ color: "var(--color-foreground-muted)" }}
           >
             Home
           </Link>
           <Link
             href="/docs"
-            className="rounded-md px-2 py-1 text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="rounded-md px-2 py-1 text-sm transition-colors"
+            style={{ color: "var(--color-foreground-muted)" }}
           >
             Docs
           </Link>
@@ -105,8 +111,8 @@ function SiteHeader() {
             rel="noreferrer noopener"
             aria-label="Support via PayPal"
             style={{
-              backgroundColor: "var(--accent)",
-              color: "var(--accent-fg)",
+              backgroundColor: "var(--color-accent)",
+              color: "var(--color-accent-foreground)",
             }}
           >
             <svg
@@ -128,12 +134,18 @@ function SiteHeader() {
 
 function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-neutral-200 dark:border-neutral-800">
+    <footer
+      className="mt-24 border-t"
+      style={{ borderColor: "var(--color-border)" }}
+    >
       <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-          kora-ui
+        <p className="text-sm font-medium">kora-ui</p>
+        <p
+          className="text-sm"
+          style={{ color: "var(--color-foreground-subtle)" }}
+        >
+          MIT © Isaac Avila
         </p>
-        <p className="text-sm text-neutral-500">MIT © Isaac Avila</p>
       </div>
     </footer>
   );

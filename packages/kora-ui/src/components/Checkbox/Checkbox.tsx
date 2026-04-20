@@ -4,12 +4,11 @@ export interface CheckboxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {}
 
 const base =
-  "peer size-4 shrink-0 rounded border border-neutral-300 bg-white text-neutral-900 " +
-  "accent-neutral-900 " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 " +
-  "disabled:cursor-not-allowed disabled:opacity-50 " +
-  "dark:border-neutral-700 dark:bg-neutral-950 dark:accent-white " +
-  "dark:focus-visible:ring-white dark:focus-visible:ring-offset-neutral-950";
+  "peer size-4 shrink-0 rounded border " +
+  "border-[var(--color-border-strong)] bg-[var(--color-background)] " +
+  "accent-[var(--color-accent)] " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] " +
+  "disabled:cursor-not-allowed disabled:opacity-50";
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className = "", ...rest }, ref) => (
