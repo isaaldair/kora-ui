@@ -1,11 +1,25 @@
 import type { Metadata } from "next";
 import { SiWhatsapp } from "react-icons/si";
+import { WhatsAppFloat } from "kora-ui/client";
 
 export const metadata: Metadata = {
   title: "WhatsApp float",
   description:
     "Floating WhatsApp contact button with single or multi-contact menu. Customizable color.",
 };
+
+const demoContacts = [
+  {
+    name: "Sucursal Centro",
+    label: "Av. Reforma 100",
+    phone: "+525511111111",
+  },
+  {
+    name: "Sucursal Polanco",
+    label: "Masaryk 200",
+    phone: "+525522222222",
+  },
+];
 
 export default function WhatsAppFloatPage() {
   return (
@@ -28,33 +42,19 @@ export default function WhatsAppFloatPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Preview
         </h2>
+        <p className="text-sm text-neutral-500">
+          Click the bubble to open the contacts menu.
+        </p>
         <div className="relative grid h-72 place-items-center overflow-hidden rounded-xl border border-neutral-200 bg-white/40 dark:border-neutral-800 dark:bg-neutral-950/40">
-          <p className="text-sm text-neutral-500">
-            Default color — WhatsApp green (<code>#25d366</code>).
-          </p>
-          <div className="absolute bottom-6 right-6 flex flex-col-reverse items-end gap-3">
-            <div className="w-72 rounded-xl border border-neutral-200 bg-white p-2 shadow-xl dark:border-neutral-800 dark:bg-neutral-950">
-              <h4 className="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                Choose a contact
-              </h4>
-              <ul className="mt-1 flex flex-col">
-                <li className="flex w-full flex-col items-start rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-900">
-                  <span className="text-sm font-medium">Sucursal Centro</span>
-                  <span className="text-xs text-neutral-500">Av. Reforma 100</span>
-                </li>
-                <li className="flex w-full flex-col items-start rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-900">
-                  <span className="text-sm font-medium">Sucursal Polanco</span>
-                  <span className="text-xs text-neutral-500">Masaryk 200</span>
-                </li>
-              </ul>
-            </div>
-            <div
-              className="flex size-14 items-center justify-center rounded-full text-white shadow-xl"
-              style={{ backgroundColor: "#25d366" }}
-            >
-              <SiWhatsapp size={26} />
-            </div>
-          </div>
+          <span className="text-xs uppercase tracking-wider text-neutral-400">
+            Default — WhatsApp green (<code>#25d366</code>)
+          </span>
+          <WhatsAppFloat
+            contacts={demoContacts}
+            menuTitle="Elige una sucursal"
+            message="Hola, me gustaría cotizar"
+            className="!absolute"
+          />
         </div>
       </section>
 
@@ -99,29 +99,38 @@ export default function WhatsAppFloatPage() {
         </h2>
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           Any CSS color works — hex, rgb, hsl, named, or CSS variables from
-          your palette (including the <a className="underline underline-offset-4" href="/docs/palette">electric palette</a>).
+          your palette (including the{" "}
+          <a className="underline underline-offset-4" href="/docs/palette">
+            electric palette
+          </a>
+          ). Each bubble below is a real <code>WhatsAppFloat</code> — click to
+          open WhatsApp.
         </p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {swatches.map((s) => (
             <div
               key={s.name}
-              className="relative flex h-28 items-center justify-center rounded-xl border border-neutral-200 bg-white/40 dark:border-neutral-800 dark:bg-neutral-950/40"
+              className="relative flex h-32 items-end justify-end overflow-hidden rounded-xl border border-neutral-200 bg-white/40 p-3 dark:border-neutral-800 dark:bg-neutral-950/40"
             >
-              <div
-                className="flex size-14 items-center justify-center rounded-full shadow-xl"
-                style={{ backgroundColor: s.color, color: s.iconColor ?? "#fff" }}
-              >
-                <SiWhatsapp size={26} />
-              </div>
-              <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
+              <span className="absolute left-3 top-3 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
                 {s.name}
               </span>
+              <WhatsAppFloat
+                color={s.color}
+                iconColor={s.iconColor}
+                contact={{
+                  name: s.name,
+                  phone: "+525512345678",
+                  message: `Hola, vengo del preview "${s.name}" de kora-ui`,
+                }}
+                className="!absolute"
+              />
             </div>
           ))}
         </div>
         <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
           <code>{`<WhatsAppFloat
-  color="var(--color-electric-violet-500)"
+  color="var(--color-electric-violet-600)"
   iconColor="#fff"
   contact={{ name: "Ventas", phone: "+52 55 1234 5678" }}
 />`}</code>
