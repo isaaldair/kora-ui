@@ -19,13 +19,16 @@ export const metadata: Metadata = {
   },
   description:
     "A TypeScript-first React UI component library styled with Tailwind CSS. Ships an electric color palette.",
-  metadataBase: new URL("https://kora-ui.vercel.app"),
+  metadataBase: new URL("https://kora-ui.istmocode.com"),
   openGraph: {
     title: "kora-ui",
     description: "React + Tailwind component library.",
     type: "website",
   },
 };
+
+const PAYPAL_URL =
+  "https://www.paypal.com/donate/?hosted_button_id=N46Z7WUY5T3AQ";
 
 export default function RootLayout({
   children,
@@ -52,11 +55,11 @@ export default function RootLayout({
 function SiteHeader() {
   return (
     <header className="sticky top-0 z-10 border-b border-neutral-200/60 bg-white/70 backdrop-blur dark:border-neutral-800/60 dark:bg-black/60">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="text-sm font-semibold tracking-tight">
           kora<span className="text-neutral-400">-ui</span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400">
+        <nav className="flex items-center gap-5 text-sm text-neutral-600 dark:text-neutral-400">
           <Link
             href="/"
             className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
@@ -85,6 +88,23 @@ function SiteHeader() {
           >
             GitHub
           </a>
+          <a
+            href={PAYPAL_URL}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium text-neutral-900 shadow-sm transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900"
+          >
+            <svg
+              aria-hidden="true"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 21s-7.5-4.5-9.7-9.1C.6 7.5 3.5 3 7.5 3c2 0 3.6 1 4.5 2.5C12.9 4 14.5 3 16.5 3c4 0 6.9 4.5 5.2 8.9C19.5 16.5 12 21 12 21z" />
+            </svg>
+            <span className="hidden sm:inline">Support</span>
+          </a>
         </nav>
       </div>
     </header>
@@ -94,30 +114,11 @@ function SiteHeader() {
 function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-neutral-200 dark:border-neutral-800">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-1">
-          <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-            kora-ui
-          </p>
-          <p className="text-sm text-neutral-500">MIT © Isaac Avila</p>
-        </div>
-        <a
-          href="https://www.paypal.com/donate/?hosted_button_id=N46Z7WUY5T3AQ"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900"
-        >
-          <svg
-            aria-hidden="true"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path d="M12 21s-7.5-4.5-9.7-9.1C.6 7.5 3.5 3 7.5 3c2 0 3.6 1 4.5 2.5C12.9 4 14.5 3 16.5 3c4 0 6.9 4.5 5.2 8.9C19.5 16.5 12 21 12 21z" />
-          </svg>
-          Support via PayPal
-        </a>
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+          kora-ui
+        </p>
+        <p className="text-sm text-neutral-500">MIT © Isaac Avila</p>
       </div>
     </footer>
   );
