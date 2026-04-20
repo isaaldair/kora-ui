@@ -46,11 +46,15 @@ export interface WhatsAppFloatProps {
   className?: string;
 }
 
+// Container is anchored to its corner; children are stacked so the button
+// stays pinned and the menu grows away from the anchor (above if bottom,
+// below if top). DOM order is always [menu, button] — the flex direction
+// decides which one renders closest to the anchored edge.
 const POSITIONS: Record<WhatsAppFloatPosition, string> = {
-  "bottom-right": "bottom-6 right-6 flex-col-reverse items-end",
-  "bottom-left": "bottom-6 left-6 flex-col-reverse items-start",
-  "top-right": "top-6 right-6 flex-col items-end",
-  "top-left": "top-6 left-6 flex-col items-start",
+  "bottom-right": "bottom-6 right-6 flex-col items-end",
+  "bottom-left": "bottom-6 left-6 flex-col items-start",
+  "top-right": "top-6 right-6 flex-col-reverse items-end",
+  "top-left": "top-6 left-6 flex-col-reverse items-start",
 };
 
 const DEFAULT_COLOR = "#25d366";
