@@ -1,0 +1,243 @@
+/*
+ * kora-ui — Electric palette
+ *
+ * Vibrant, neon-adjacent variants of the standard Tailwind color ramps.
+ * Every hue is pushed to 100% saturation in HSL; lightness stops mirror
+ * Tailwind's 50/100/.../900/950 scale so every `bg-electric-*`, `text-*`,
+ * `border-*`, `ring-*` utility exists and behaves identically to the
+ * default palette.
+ *
+ * Light + dark: the hues are saturated enough to hold legibility on
+ * either surface, so the palette does NOT ship mode-specific tokens.
+ * Pick a lighter shade (300-500) for dark backgrounds; a darker shade
+ * (600-800) for light backgrounds.
+ *
+ * Use:
+ *   @import "kora-ui/styles/electric.css";
+ *
+ * Then in markup:
+ *   <div className="bg-electric-blue-500 text-electric-blue-50">…</div>
+ */
+
+@theme {
+  /* red — 0deg */
+  --color-electric-red-50:  hsl(0 100% 97%);
+  --color-electric-red-100: hsl(0 100% 94%);
+  --color-electric-red-200: hsl(0 100% 87%);
+  --color-electric-red-300: hsl(0 100% 77%);
+  --color-electric-red-400: hsl(0 100% 65%);
+  --color-electric-red-500: hsl(0 100% 55%);
+  --color-electric-red-600: hsl(0 100% 46%);
+  --color-electric-red-700: hsl(0 100% 37%);
+  --color-electric-red-800: hsl(0 100% 28%);
+  --color-electric-red-900: hsl(0 100% 19%);
+  --color-electric-red-950: hsl(0 100% 10%);
+
+  /* orange — 25deg */
+  --color-electric-orange-50:  hsl(25 100% 97%);
+  --color-electric-orange-100: hsl(25 100% 94%);
+  --color-electric-orange-200: hsl(25 100% 87%);
+  --color-electric-orange-300: hsl(25 100% 77%);
+  --color-electric-orange-400: hsl(25 100% 65%);
+  --color-electric-orange-500: hsl(25 100% 55%);
+  --color-electric-orange-600: hsl(25 100% 46%);
+  --color-electric-orange-700: hsl(25 100% 37%);
+  --color-electric-orange-800: hsl(25 100% 28%);
+  --color-electric-orange-900: hsl(25 100% 19%);
+  --color-electric-orange-950: hsl(25 100% 10%);
+
+  /* amber — 42deg */
+  --color-electric-amber-50:  hsl(42 100% 97%);
+  --color-electric-amber-100: hsl(42 100% 94%);
+  --color-electric-amber-200: hsl(42 100% 87%);
+  --color-electric-amber-300: hsl(42 100% 77%);
+  --color-electric-amber-400: hsl(42 100% 65%);
+  --color-electric-amber-500: hsl(42 100% 55%);
+  --color-electric-amber-600: hsl(42 100% 46%);
+  --color-electric-amber-700: hsl(42 100% 37%);
+  --color-electric-amber-800: hsl(42 100% 28%);
+  --color-electric-amber-900: hsl(42 100% 19%);
+  --color-electric-amber-950: hsl(42 100% 10%);
+
+  /* yellow — 54deg */
+  --color-electric-yellow-50:  hsl(54 100% 97%);
+  --color-electric-yellow-100: hsl(54 100% 94%);
+  --color-electric-yellow-200: hsl(54 100% 87%);
+  --color-electric-yellow-300: hsl(54 100% 77%);
+  --color-electric-yellow-400: hsl(54 100% 65%);
+  --color-electric-yellow-500: hsl(54 100% 55%);
+  --color-electric-yellow-600: hsl(54 100% 46%);
+  --color-electric-yellow-700: hsl(54 100% 37%);
+  --color-electric-yellow-800: hsl(54 100% 28%);
+  --color-electric-yellow-900: hsl(54 100% 19%);
+  --color-electric-yellow-950: hsl(54 100% 10%);
+
+  /* lime — 82deg */
+  --color-electric-lime-50:  hsl(82 100% 97%);
+  --color-electric-lime-100: hsl(82 100% 94%);
+  --color-electric-lime-200: hsl(82 100% 87%);
+  --color-electric-lime-300: hsl(82 100% 77%);
+  --color-electric-lime-400: hsl(82 100% 65%);
+  --color-electric-lime-500: hsl(82 100% 55%);
+  --color-electric-lime-600: hsl(82 100% 46%);
+  --color-electric-lime-700: hsl(82 100% 37%);
+  --color-electric-lime-800: hsl(82 100% 28%);
+  --color-electric-lime-900: hsl(82 100% 19%);
+  --color-electric-lime-950: hsl(82 100% 10%);
+
+  /* green — 142deg */
+  --color-electric-green-50:  hsl(142 100% 97%);
+  --color-electric-green-100: hsl(142 100% 94%);
+  --color-electric-green-200: hsl(142 100% 87%);
+  --color-electric-green-300: hsl(142 100% 77%);
+  --color-electric-green-400: hsl(142 100% 65%);
+  --color-electric-green-500: hsl(142 100% 55%);
+  --color-electric-green-600: hsl(142 100% 46%);
+  --color-electric-green-700: hsl(142 100% 37%);
+  --color-electric-green-800: hsl(142 100% 28%);
+  --color-electric-green-900: hsl(142 100% 19%);
+  --color-electric-green-950: hsl(142 100% 10%);
+
+  /* emerald — 158deg */
+  --color-electric-emerald-50:  hsl(158 100% 97%);
+  --color-electric-emerald-100: hsl(158 100% 94%);
+  --color-electric-emerald-200: hsl(158 100% 87%);
+  --color-electric-emerald-300: hsl(158 100% 77%);
+  --color-electric-emerald-400: hsl(158 100% 65%);
+  --color-electric-emerald-500: hsl(158 100% 55%);
+  --color-electric-emerald-600: hsl(158 100% 46%);
+  --color-electric-emerald-700: hsl(158 100% 37%);
+  --color-electric-emerald-800: hsl(158 100% 28%);
+  --color-electric-emerald-900: hsl(158 100% 19%);
+  --color-electric-emerald-950: hsl(158 100% 10%);
+
+  /* teal — 174deg */
+  --color-electric-teal-50:  hsl(174 100% 97%);
+  --color-electric-teal-100: hsl(174 100% 94%);
+  --color-electric-teal-200: hsl(174 100% 87%);
+  --color-electric-teal-300: hsl(174 100% 77%);
+  --color-electric-teal-400: hsl(174 100% 65%);
+  --color-electric-teal-500: hsl(174 100% 55%);
+  --color-electric-teal-600: hsl(174 100% 46%);
+  --color-electric-teal-700: hsl(174 100% 37%);
+  --color-electric-teal-800: hsl(174 100% 28%);
+  --color-electric-teal-900: hsl(174 100% 19%);
+  --color-electric-teal-950: hsl(174 100% 10%);
+
+  /* cyan — 188deg */
+  --color-electric-cyan-50:  hsl(188 100% 97%);
+  --color-electric-cyan-100: hsl(188 100% 94%);
+  --color-electric-cyan-200: hsl(188 100% 87%);
+  --color-electric-cyan-300: hsl(188 100% 77%);
+  --color-electric-cyan-400: hsl(188 100% 65%);
+  --color-electric-cyan-500: hsl(188 100% 55%);
+  --color-electric-cyan-600: hsl(188 100% 46%);
+  --color-electric-cyan-700: hsl(188 100% 37%);
+  --color-electric-cyan-800: hsl(188 100% 28%);
+  --color-electric-cyan-900: hsl(188 100% 19%);
+  --color-electric-cyan-950: hsl(188 100% 10%);
+
+  /* sky — 200deg */
+  --color-electric-sky-50:  hsl(200 100% 97%);
+  --color-electric-sky-100: hsl(200 100% 94%);
+  --color-electric-sky-200: hsl(200 100% 87%);
+  --color-electric-sky-300: hsl(200 100% 77%);
+  --color-electric-sky-400: hsl(200 100% 65%);
+  --color-electric-sky-500: hsl(200 100% 55%);
+  --color-electric-sky-600: hsl(200 100% 46%);
+  --color-electric-sky-700: hsl(200 100% 37%);
+  --color-electric-sky-800: hsl(200 100% 28%);
+  --color-electric-sky-900: hsl(200 100% 19%);
+  --color-electric-sky-950: hsl(200 100% 10%);
+
+  /* blue — 220deg */
+  --color-electric-blue-50:  hsl(220 100% 97%);
+  --color-electric-blue-100: hsl(220 100% 94%);
+  --color-electric-blue-200: hsl(220 100% 87%);
+  --color-electric-blue-300: hsl(220 100% 77%);
+  --color-electric-blue-400: hsl(220 100% 65%);
+  --color-electric-blue-500: hsl(220 100% 55%);
+  --color-electric-blue-600: hsl(220 100% 46%);
+  --color-electric-blue-700: hsl(220 100% 37%);
+  --color-electric-blue-800: hsl(220 100% 28%);
+  --color-electric-blue-900: hsl(220 100% 19%);
+  --color-electric-blue-950: hsl(220 100% 10%);
+
+  /* indigo — 245deg */
+  --color-electric-indigo-50:  hsl(245 100% 97%);
+  --color-electric-indigo-100: hsl(245 100% 94%);
+  --color-electric-indigo-200: hsl(245 100% 87%);
+  --color-electric-indigo-300: hsl(245 100% 77%);
+  --color-electric-indigo-400: hsl(245 100% 70%);
+  --color-electric-indigo-500: hsl(245 100% 60%);
+  --color-electric-indigo-600: hsl(245 100% 50%);
+  --color-electric-indigo-700: hsl(245 100% 40%);
+  --color-electric-indigo-800: hsl(245 100% 30%);
+  --color-electric-indigo-900: hsl(245 100% 20%);
+  --color-electric-indigo-950: hsl(245 100% 12%);
+
+  /* violet — 266deg */
+  --color-electric-violet-50:  hsl(266 100% 97%);
+  --color-electric-violet-100: hsl(266 100% 94%);
+  --color-electric-violet-200: hsl(266 100% 87%);
+  --color-electric-violet-300: hsl(266 100% 77%);
+  --color-electric-violet-400: hsl(266 100% 70%);
+  --color-electric-violet-500: hsl(266 100% 60%);
+  --color-electric-violet-600: hsl(266 100% 50%);
+  --color-electric-violet-700: hsl(266 100% 40%);
+  --color-electric-violet-800: hsl(266 100% 30%);
+  --color-electric-violet-900: hsl(266 100% 20%);
+  --color-electric-violet-950: hsl(266 100% 12%);
+
+  /* purple — 280deg */
+  --color-electric-purple-50:  hsl(280 100% 97%);
+  --color-electric-purple-100: hsl(280 100% 94%);
+  --color-electric-purple-200: hsl(280 100% 87%);
+  --color-electric-purple-300: hsl(280 100% 77%);
+  --color-electric-purple-400: hsl(280 100% 70%);
+  --color-electric-purple-500: hsl(280 100% 60%);
+  --color-electric-purple-600: hsl(280 100% 50%);
+  --color-electric-purple-700: hsl(280 100% 40%);
+  --color-electric-purple-800: hsl(280 100% 30%);
+  --color-electric-purple-900: hsl(280 100% 20%);
+  --color-electric-purple-950: hsl(280 100% 12%);
+
+  /* fuchsia — 296deg */
+  --color-electric-fuchsia-50:  hsl(296 100% 97%);
+  --color-electric-fuchsia-100: hsl(296 100% 94%);
+  --color-electric-fuchsia-200: hsl(296 100% 87%);
+  --color-electric-fuchsia-300: hsl(296 100% 77%);
+  --color-electric-fuchsia-400: hsl(296 100% 65%);
+  --color-electric-fuchsia-500: hsl(296 100% 55%);
+  --color-electric-fuchsia-600: hsl(296 100% 46%);
+  --color-electric-fuchsia-700: hsl(296 100% 37%);
+  --color-electric-fuchsia-800: hsl(296 100% 28%);
+  --color-electric-fuchsia-900: hsl(296 100% 19%);
+  --color-electric-fuchsia-950: hsl(296 100% 10%);
+
+  /* pink — 322deg */
+  --color-electric-pink-50:  hsl(322 100% 97%);
+  --color-electric-pink-100: hsl(322 100% 94%);
+  --color-electric-pink-200: hsl(322 100% 87%);
+  --color-electric-pink-300: hsl(322 100% 77%);
+  --color-electric-pink-400: hsl(322 100% 65%);
+  --color-electric-pink-500: hsl(322 100% 55%);
+  --color-electric-pink-600: hsl(322 100% 46%);
+  --color-electric-pink-700: hsl(322 100% 37%);
+  --color-electric-pink-800: hsl(322 100% 28%);
+  --color-electric-pink-900: hsl(322 100% 19%);
+  --color-electric-pink-950: hsl(322 100% 10%);
+
+  /* rose — 345deg */
+  --color-electric-rose-50:  hsl(345 100% 97%);
+  --color-electric-rose-100: hsl(345 100% 94%);
+  --color-electric-rose-200: hsl(345 100% 87%);
+  --color-electric-rose-300: hsl(345 100% 77%);
+  --color-electric-rose-400: hsl(345 100% 65%);
+  --color-electric-rose-500: hsl(345 100% 55%);
+  --color-electric-rose-600: hsl(345 100% 46%);
+  --color-electric-rose-700: hsl(345 100% 37%);
+  --color-electric-rose-800: hsl(345 100% 28%);
+  --color-electric-rose-900: hsl(345 100% 19%);
+  --color-electric-rose-950: hsl(345 100% 10%);
+}

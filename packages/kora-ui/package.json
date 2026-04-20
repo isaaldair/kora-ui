@@ -1,14 +1,14 @@
 {
   "name": "kora-ui",
-  "version": "0.0.1",
-  "description": "React UI component library styled with Tailwind CSS.",
+  "version": "0.1.0",
+  "description": "React UI component library styled with Tailwind CSS. Ships 11 primitives + an electric color palette.",
   "author": {
     "name": "Isaac Avila",
     "email": "isaacaldairavila@gmail.com",
     "url": "https://github.com/isaaldair"
   },
   "license": "MIT",
-  "homepage": "https://github.com/isaaldair/kora-ui#readme",
+  "homepage": "https://kora-ui.istmocode.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isaaldair/kora-ui.git"
@@ -26,6 +26,8 @@
     "tailwind",
     "tailwindcss",
     "typescript",
+    "electric",
+    "palette",
     "kora",
     "kora-ui"
   ],
@@ -39,19 +41,29 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js",
+      "require": "./dist/client.cjs"
+    },
+    "./styles/electric.css": "./src/styles/electric.css",
+    "./styles/*": "./src/styles/*",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
+    "src/styles",
     "README.md",
     "LICENSE"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node ./scripts/prepend-use-client.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"

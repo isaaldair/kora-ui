@@ -6,7 +6,7 @@ A React UI component library styled with **Tailwind CSS**. TypeScript-first, tre
 [![npm downloads](https://img.shields.io/npm/dm/kora-ui.svg)](https://www.npmjs.com/package/kora-ui)
 [![license](https://img.shields.io/npm/l/kora-ui.svg)](./LICENSE)
 
-> **Status:** `v0.0.1` — early preview. The API is not stable yet.
+Live docs: **[kora-ui.istmocode.com](https://kora-ui.istmocode.com)**
 
 ## Install
 
@@ -20,9 +20,9 @@ yarn add kora-ui
 
 `react` and `react-dom` are peer dependencies (React 18+).
 
-## Requirements
+## Setup
 
-`kora-ui` ships components that use Tailwind utility classes. To make them render correctly, the consuming app needs a working Tailwind setup. In `tailwind.config.{js,ts}`, add `kora-ui` to `content` so its classes are picked up:
+In your `tailwind.config.{js,ts}`, add kora-ui to `content`:
 
 ```ts
 // tailwind.config.ts
@@ -36,49 +36,95 @@ export default {
 } satisfies Config;
 ```
 
+Optionally import the electric palette once to enable every `bg-electric-*`,
+`text-electric-*`, `border-electric-*`, and `ring-electric-*` utility:
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "kora-ui/styles/electric.css";
+```
+
 ## Usage
 
 ```tsx
-import { Button } from "kora-ui";
+import { Button, Card, CardHeader, CardTitle, CardContent } from "kora-ui";
 
 export default function Example() {
   return (
-    <div className="flex gap-2">
-      <Button variant="primary">Save</Button>
-      <Button variant="secondary">Cancel</Button>
-      <Button variant="ghost" size="sm">Learn more</Button>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Deploy to production</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button variant="primary">Deploy</Button>
+      </CardContent>
+    </Card>
   );
 }
 ```
 
 ## Components
 
-| Component | Status |
+| Component | Import |
 | --- | --- |
-| `Button` | ✅ available |
-| `Card`   | 🛠 in progress |
-| `Input`  | 🛠 in progress |
+| Alert | `Alert`, `AlertTitle`, `AlertDescription` |
+| Avatar | `Avatar`, `AvatarImage`, `AvatarFallback` |
+| Badge | `Badge` |
+| Button | `Button` |
+| Card | `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` |
+| Checkbox | `Checkbox` |
+| Input | `Input` |
+| Label | `Label` |
+| Separator | `Separator` |
+| Textarea | `Textarea` |
+| WhatsApp float | `WhatsAppFloat` (from `kora-ui/client`) |
 
-More components land on every minor release. Track progress in the [issues](https://github.com/isaaldair/kora-ui/issues).
+### `WhatsAppFloat`
 
-## API
+Floating contact button that opens a WhatsApp chat. Pass a single `contact`
+for direct chat, or an array of `contacts` — the button shows a menu for the
+visitor to pick one (ideal for a business with several branches).
 
-### `<Button />`
+```tsx
+import { WhatsAppFloat } from "kora-ui/client";
 
-```ts
-type ButtonVariant = "primary" | "secondary" | "ghost";
-type ButtonSize = "sm" | "md" | "lg";
+// Single contact
+<WhatsAppFloat
+  contact={{
+    name: "Ventas",
+    phone: "+52 55 1234 5678",
+    message: "Hola, me interesa un producto",
+  }}
+/>
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant; // default "primary"
-  size?: ButtonSize;       // default "md"
-}
+// Multiple contacts → pops a menu
+<WhatsAppFloat
+  menuTitle="Elige una sucursal"
+  contacts={[
+    { name: "Centro",  phone: "+52 55 1111 1111", label: "Av. Reforma 100" },
+    { name: "Polanco", phone: "+52 55 2222 2222", label: "Masaryk 200" },
+  ]}
+/>
 ```
 
-## Contributing
+## Electric palette
 
-Issues and pull requests are welcome at [github.com/isaaldair/kora-ui](https://github.com/isaaldair/kora-ui).
+17 Tailwind hues × 11 shades, pushed to 100% saturation — neon-adjacent color
+tokens that hold legibility in both light and dark surfaces.
+
+```tsx
+<button className="bg-electric-blue-500 text-electric-blue-50 hover:bg-electric-blue-600">
+  Deploy
+</button>
+```
+
+Preview every shade at [kora-ui.istmocode.com/docs/palette](https://kora-ui.istmocode.com/docs/palette).
+
+## Docs
+
+Full documentation, previews, and prop tables at
+**[kora-ui.istmocode.com](https://kora-ui.istmocode.com)**.
 
 ## License
 

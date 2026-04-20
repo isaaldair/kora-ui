@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import { ThemeControls } from "@/components/theme-controls";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const dmSerif = DM_Serif_Display({
+  variable: "--font-dm-serif-display",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -12,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s — kora-ui",
   },
   description:
-    "A TypeScript-first React UI component library styled with Tailwind CSS.",
+    "A TypeScript-first React UI component library styled with Tailwind CSS. Ships an electric color palette.",
   metadataBase: new URL("https://kora-ui.vercel.app"),
   openGraph: {
     title: "kora-ui",
@@ -29,12 +35,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      data-accent="blue"
+      data-k-style="basic"
+      className={`${geistSans.variable} ${geistMono.variable} ${dmSerif.variable} antialiased`}
     >
       <body className="flex min-h-screen flex-col">
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />
+        <ThemeControls />
       </body>
     </html>
   );
@@ -43,7 +52,7 @@ export default function RootLayout({
 function SiteHeader() {
   return (
     <header className="sticky top-0 z-10 border-b border-neutral-200/60 bg-white/70 backdrop-blur dark:border-neutral-800/60 dark:bg-black/60">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="text-sm font-semibold tracking-tight">
           kora<span className="text-neutral-400">-ui</span>
         </Link>
@@ -55,10 +64,10 @@ function SiteHeader() {
             Home
           </Link>
           <Link
-            href="/components"
+            href="/docs"
             className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
           >
-            Components
+            Docs
           </Link>
           <a
             href="https://www.npmjs.com/package/kora-ui"
@@ -85,14 +94,12 @@ function SiteHeader() {
 function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-neutral-200 dark:border-neutral-800">
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col gap-1">
           <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
             kora-ui
           </p>
-          <p className="text-sm text-neutral-500">
-            MIT © Isaac Avila
-          </p>
+          <p className="text-sm text-neutral-500">MIT © Isaac Avila</p>
         </div>
         <a
           href="https://www.paypal.com/donate/?hosted_button_id=N46Z7WUY5T3AQ"

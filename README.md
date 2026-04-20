@@ -6,7 +6,7 @@ A React UI component library styled with **Tailwind CSS**. TypeScript-first, tre
 [![npm downloads](https://img.shields.io/npm/dm/kora-ui.svg)](https://www.npmjs.com/package/kora-ui)
 [![license](https://img.shields.io/npm/l/kora-ui.svg)](./packages/kora-ui/LICENSE)
 
-> **Status:** `v0.0.1` — early preview. The API is not stable yet.
+Live docs: **[kora-ui.istmocode.com](https://kora-ui.istmocode.com)**
 
 ## Install
 
@@ -20,10 +20,9 @@ yarn add kora-ui
 
 `react` and `react-dom` are peer dependencies (React 18+).
 
-## Requirements
+## Setup
 
-`kora-ui` ships components that use Tailwind utility classes. In your
-`tailwind.config.{js,ts}`, add `kora-ui` to `content` so its classes are
+In your `tailwind.config.{js,ts}`, add kora-ui to `content` so its classes are
 picked up:
 
 ```ts
@@ -38,81 +37,68 @@ export default {
 } satisfies Config;
 ```
 
+To enable the electric palette, import its stylesheet once at your app's CSS
+entry:
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "kora-ui/styles/electric.css";
+```
+
 ## Usage
 
 ```tsx
-import { Button } from "kora-ui";
+import { Button, Card, CardHeader, CardTitle, CardContent } from "kora-ui";
 
 export default function Example() {
   return (
-    <div className="flex gap-2">
-      <Button variant="primary">Save</Button>
-      <Button variant="secondary">Cancel</Button>
-      <Button variant="ghost" size="sm">Learn more</Button>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Deploy to production</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button variant="primary">Deploy</Button>
+      </CardContent>
+    </Card>
   );
 }
 ```
 
 ## Components
 
-| Component | Status |
+| Component | Import |
 | --- | --- |
-| `Button` | ✅ available |
-| `Card`   | 🛠 in progress |
-| `Input`  | 🛠 in progress |
+| Alert | `Alert`, `AlertTitle`, `AlertDescription` |
+| Avatar | `Avatar`, `AvatarImage`, `AvatarFallback` |
+| Badge | `Badge` |
+| Button | `Button` |
+| Card | `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` |
+| Checkbox | `Checkbox` |
+| Input | `Input` |
+| Label | `Label` |
+| Separator | `Separator` |
+| Textarea | `Textarea` |
+| WhatsApp float | `WhatsAppFloat` from `kora-ui/client` (floating contact button; multi-branch menu) |
 
-More land every release. Track progress in [issues](https://github.com/isaaldair/kora-ui/issues).
+## Electric palette
 
-## API
+Every Tailwind hue, pushed to 100% saturation. Works in light and dark.
+17 hues × 11 shades = 187 CSS custom properties + Tailwind utility classes
+(`bg-electric-blue-500`, `text-electric-fuchsia-600`, etc.).
 
-### `<Button />`
-
-```ts
-type ButtonVariant = "primary" | "secondary" | "ghost";
-type ButtonSize = "sm" | "md" | "lg";
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant; // default "primary"
-  size?: ButtonSize;       // default "md"
-}
+```tsx
+<button className="bg-electric-blue-500 text-electric-blue-50 hover:bg-electric-blue-600">
+  Deploy
+</button>
 ```
 
----
+Preview every shade on the [palette page](https://kora-ui.istmocode.com/docs/palette).
 
-## Repository layout
+## Docs
 
-This repo is an npm-workspaces monorepo:
-
-```
-kora-ui/
-├── packages/kora-ui/   # the published npm package
-└── apps/docs/          # Next.js 16 site → kora-ui.vercel.app
-```
-
-### Develop
-
-```bash
-npm install         # install all workspaces
-npm run build:lib   # build the library to packages/kora-ui/dist
-npm run dev:lib     # rebuild on change (watch)
-npm run dev:docs    # docs site on http://localhost:3000
-npm run typecheck   # type-check every workspace
-```
-
-### Publish the library
-
-```bash
-cd packages/kora-ui
-npm version patch
-npm publish
-```
-
-### Deploy the docs site
-
-`vercel.json` at the repo root declares a monorepo build. Import the repo at
-[vercel.com/new](https://vercel.com/new), leave **Root Directory** empty, and
-Vercel will build `kora-ui` first, then the Next.js app.
+Full documentation, previews, and prop tables at
+**[kora-ui.istmocode.com](https://kora-ui.istmocode.com)**.
 
 ## License
 

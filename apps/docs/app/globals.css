@@ -1,17 +1,29 @@
 @import "tailwindcss";
+@import "kora-ui/styles/electric.css";
 
 @source "../../../packages/kora-ui/src/**/*.{ts,tsx}";
 
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;
+
+  /* theme tokens — overridden by data-accent / data-k-style on <html> */
+  --accent: var(--color-electric-blue-500);
+  --accent-strong: var(--color-electric-blue-600);
+  --accent-soft: var(--color-electric-blue-100);
+  --accent-fg: #ffffff;
+  --font-display: var(--font-geist-sans);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +31,30 @@
     --background: #0a0a0a;
     --foreground: #fafafa;
   }
+}
+
+/* accent variants */
+[data-accent="red"]      { --accent: var(--color-electric-red-500);      --accent-strong: var(--color-electric-red-600);      --accent-soft: var(--color-electric-red-100); }
+[data-accent="orange"]   { --accent: var(--color-electric-orange-500);   --accent-strong: var(--color-electric-orange-600);   --accent-soft: var(--color-electric-orange-100); }
+[data-accent="amber"]    { --accent: var(--color-electric-amber-500);    --accent-strong: var(--color-electric-amber-600);    --accent-soft: var(--color-electric-amber-100);  --accent-fg: #0a0a0a; }
+[data-accent="yellow"]   { --accent: var(--color-electric-yellow-400);   --accent-strong: var(--color-electric-yellow-500);   --accent-soft: var(--color-electric-yellow-100); --accent-fg: #0a0a0a; }
+[data-accent="lime"]     { --accent: var(--color-electric-lime-400);     --accent-strong: var(--color-electric-lime-500);     --accent-soft: var(--color-electric-lime-100);   --accent-fg: #0a0a0a; }
+[data-accent="green"]    { --accent: var(--color-electric-green-500);    --accent-strong: var(--color-electric-green-600);    --accent-soft: var(--color-electric-green-100); }
+[data-accent="emerald"]  { --accent: var(--color-electric-emerald-500);  --accent-strong: var(--color-electric-emerald-600);  --accent-soft: var(--color-electric-emerald-100); }
+[data-accent="teal"]     { --accent: var(--color-electric-teal-500);     --accent-strong: var(--color-electric-teal-600);     --accent-soft: var(--color-electric-teal-100); }
+[data-accent="cyan"]     { --accent: var(--color-electric-cyan-400);     --accent-strong: var(--color-electric-cyan-500);     --accent-soft: var(--color-electric-cyan-100);   --accent-fg: #0a0a0a; }
+[data-accent="sky"]      { --accent: var(--color-electric-sky-500);      --accent-strong: var(--color-electric-sky-600);      --accent-soft: var(--color-electric-sky-100); }
+[data-accent="blue"]     { --accent: var(--color-electric-blue-500);     --accent-strong: var(--color-electric-blue-600);     --accent-soft: var(--color-electric-blue-100); }
+[data-accent="indigo"]   { --accent: var(--color-electric-indigo-600);   --accent-strong: var(--color-electric-indigo-700);   --accent-soft: var(--color-electric-indigo-100); }
+[data-accent="violet"]   { --accent: var(--color-electric-violet-600);   --accent-strong: var(--color-electric-violet-700);   --accent-soft: var(--color-electric-violet-100); }
+[data-accent="purple"]   { --accent: var(--color-electric-purple-600);   --accent-strong: var(--color-electric-purple-700);   --accent-soft: var(--color-electric-purple-100); }
+[data-accent="fuchsia"]  { --accent: var(--color-electric-fuchsia-500);  --accent-strong: var(--color-electric-fuchsia-600);  --accent-soft: var(--color-electric-fuchsia-100); }
+[data-accent="pink"]     { --accent: var(--color-electric-pink-500);     --accent-strong: var(--color-electric-pink-600);     --accent-soft: var(--color-electric-pink-100); }
+[data-accent="rose"]     { --accent: var(--color-electric-rose-500);     --accent-strong: var(--color-electric-rose-600);     --accent-soft: var(--color-electric-rose-100); }
+
+/* style variants */
+[data-k-style="editorial"] {
+  --font-display: var(--font-dm-serif-display);
 }
 
 html,
@@ -29,4 +65,17 @@ body {
 
 body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Editorial style applies the display font to all headings site-wide */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-k-style="editorial"] h1,
+[data-k-style="editorial"] h2 {
+  letter-spacing: -0.02em;
+  font-weight: 400;
 }
