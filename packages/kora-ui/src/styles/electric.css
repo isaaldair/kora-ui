@@ -19,7 +19,7 @@
  *   <div className="bg-electric-blue-500 text-electric-blue-50">…</div>
  */
 
-@theme {
+@theme static {
   /* red — 0deg */
   --color-electric-red-50:  hsl(0 100% 97%);
   --color-electric-red-100: hsl(0 100% 94%);
