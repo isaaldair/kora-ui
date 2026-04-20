@@ -6,12 +6,12 @@ import { DocsSidebar, DocsMobileNav } from "./docs-sidebar";
 const STORAGE_KEY = "kora-docs-sidebar-collapsed";
 
 export function DocsShell({ children }: { children: React.ReactNode }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === "true") setCollapsed(true);
+    if (saved === "false") setCollapsed(false);
     setHydrated(true);
   }, []);
 

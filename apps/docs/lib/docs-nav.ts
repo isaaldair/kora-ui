@@ -53,7 +53,17 @@ export const docsNav: DocsNavSection[] = [
       {
         label: "Input",
         items: [
+          { label: "Date picker", href: "/docs/components/date-picker" },
+          { label: "Input mask", href: "/docs/components/input-mask" },
+          { label: "Phone input", href: "/docs/components/phone-input" },
           { label: "Rating", href: "/docs/components/rating" },
+          { label: "Signature pad", href: "/docs/components/signature-pad" },
+        ],
+      },
+      {
+        label: "Media",
+        items: [
+          { label: "Video player", href: "/docs/components/video-player" },
         ],
       },
       {

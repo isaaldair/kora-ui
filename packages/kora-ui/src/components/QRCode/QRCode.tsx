@@ -38,6 +38,11 @@ export function QRCode({
 
   useEffect(() => {
     if (!canvasRef.current) return;
+    const dark = resolveColorToHex(color);
+    const light =
+      backgroundColor === "transparent"
+        ? "#0000"
+        : resolveColorToHex(backgroundColor);
     QRCodeLib.toCanvas(
       canvasRef.current,
       value,
@@ -45,10 +50,7 @@ export function QRCode({
         width: size,
         margin,
         errorCorrectionLevel: errorCorrection,
-        color: {
-          dark: color,
-          light: backgroundColor === "transparent" ? "#0000" : backgroundColor,
-        },
+        color: { dark, light },
       },
       (err) => {
         setError(err ? err.message : null);
@@ -78,4 +80,46 @@ export function QRCode({
       className={className}
     />
   );
+}
+
+/** Normalize any CSS color (including `var(--x)` and `hsl(...)`) to a hex
+ *  string the `qrcode` library understands. Runs client-side only. */
+function resolveColorToHex(color: string): string {
+  if (typeof document === "undefined") return color;
+  let value = color.trim();
+
+  if (value.startsWith("var(")) {
+    const m = value.match(/var\((--[^,\s)]+)/);
+    if (m?.[1]) {
+      const resolved = getComputedStyle(document.documentElement)
+        .getPropertyValue(m[1])
+        .trim();
+      if (resolved) value = resolved;
+    }
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return value;
+  try {
+    ctx.fillStyle = value;
+  } catch {
+    return "#000000";
+  }
+  const normalized = ctx.fillStyle;
+  if (typeof normalized === "string" && normalized.startsWith("rgba")) {
+    const m = normalized.match(
+      /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/,
+    );
+    if (m) {
+      const toHex = (n: string) =>
+        Number(n).toString(16).padStart(2, "0");
+      return `#${toHex(m[1]!)}${toHex(m[2]!)}${toHex(m[3]!)}${toHex(
+        String(Math.round(Number(m[4]!) * 255)),
+      )}`;
+    }
+  }
+  return (normalized as string) || "#000000";
 }
