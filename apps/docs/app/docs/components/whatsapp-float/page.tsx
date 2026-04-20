@@ -54,6 +54,7 @@ export default function WhatsAppFloatPage() {
             menuTitle="Elige una sucursal"
             message="Hola, me gustaría cotizar"
             className="!absolute"
+            onContactClick={() => {}}
           />
         </div>
       </section>
@@ -124,6 +125,7 @@ export default function WhatsAppFloatPage() {
                   message: `Hola, vengo del preview "${s.name}" de kora-ui`,
                 }}
                 className="!absolute"
+            onContactClick={() => {}}
               />
             </div>
           ))}
