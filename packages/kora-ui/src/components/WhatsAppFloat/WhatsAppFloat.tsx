@@ -45,11 +45,10 @@ export interface WhatsAppFloatProps {
   /** Append classes to the outer container (useful to override positioning). */
   className?: string;
   /**
-   * Called when a contact is selected. When provided, this replaces the
-   * default behavior (opening `wa.me/<phone>` in a new tab) — handy for
-   * previews, analytics, or custom open logic.
+   * When true, clicking a contact closes the menu without opening WhatsApp.
+   * Intended for docs/storybook previews — keep it off in production.
    */
-  onContactClick?: (contact: WhatsAppContact) => void;
+  preview?: boolean;
 }
 
 // Container is anchored to its corner; children are stacked so the button
@@ -83,7 +82,7 @@ export function WhatsAppFloat({
   iconColor = DEFAULT_ICON_COLOR,
   icon,
   className = "",
-  onContactClick,
+  preview = false,
   "aria-label": ariaLabel = "Chat on WhatsApp",
 }: WhatsAppFloatProps) {
   const list = contacts ?? (contact ? [contact] : []);
@@ -91,9 +90,7 @@ export function WhatsAppFloat({
   const [open, setOpen] = useState(false);
 
   const openChat = (c: WhatsAppContact) => {
-    if (onContactClick) {
-      onContactClick(c);
-    } else if (typeof window !== "undefined") {
+    if (!preview && typeof window !== "undefined") {
       window.open(buildWaUrl(c, message), "_blank", "noopener,noreferrer");
     }
     setOpen(false);

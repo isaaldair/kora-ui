@@ -62,22 +62,19 @@ function SiteHeader() {
           kora<span className="text-neutral-400">-ui</span>
         </Link>
 
-        <nav className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/"
-            className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+            className="rounded-md px-2 py-1 text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
           >
             Home
           </Link>
           <Link
             href="/docs"
-            className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+            className="rounded-md px-2 py-1 text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
           >
             Docs
           </Link>
-        </nav>
-
-        <div className="flex items-center gap-2">
           <Button
             variant="secondary"
             size="sm"
@@ -101,11 +98,16 @@ function SiteHeader() {
             <span className="hidden sm:inline">GitHub</span>
           </Button>
           <Button
+            variant="ghost"
             size="sm"
             href={PAYPAL_URL}
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Support via PayPal"
+            style={{
+              backgroundColor: "var(--accent)",
+              color: "var(--accent-fg)",
+            }}
           >
             <svg
               aria-hidden="true"
