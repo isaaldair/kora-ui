@@ -40,18 +40,23 @@ export const docsNav: DocsNavSection[] = [
       { label: "Avatar", href: "/docs/components/avatar" },
       { label: "Badge", href: "/docs/components/badge" },
       { label: "Button", href: "/docs/components/button" },
-      {
-        label: "Special buttons",
-        items: [
-          { label: "WhatsApp float", href: "/docs/components/whatsapp-float" },
-        ],
-      },
       { label: "Card", href: "/docs/components/card" },
       { label: "Checkbox", href: "/docs/components/checkbox" },
       { label: "Input", href: "/docs/components/input" },
       { label: "Label", href: "/docs/components/label" },
       { label: "Separator", href: "/docs/components/separator" },
       { label: "Textarea", href: "/docs/components/textarea" },
+    ],
+  },
+  {
+    title: "Social",
+    items: [
+      {
+        label: "Floating",
+        items: [
+          { label: "WhatsApp float", href: "/docs/components/whatsapp-float" },
+        ],
+      },
     ],
   },
 ];

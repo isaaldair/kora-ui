@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { SiWhatsapp } from "react-icons/si";
 
 export const metadata: Metadata = {
   title: "WhatsApp float",
   description:
-    "Floating WhatsApp contact button with single or multi-contact menu.",
+    "Floating WhatsApp contact button with single or multi-contact menu. Customizable color.",
 };
 
 export default function WhatsAppFloatPage() {
@@ -11,14 +12,15 @@ export default function WhatsAppFloatPage() {
     <article className="flex flex-col gap-10">
       <header className="flex flex-col gap-3">
         <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-          Components · Special buttons
+          Social · Floating
         </span>
         <h1 className="text-4xl font-semibold tracking-tight">WhatsApp float</h1>
         <p className="max-w-2xl text-neutral-600 dark:text-neutral-400">
           Floating action button that opens a WhatsApp chat. Pass a single{" "}
           <code>contact</code> for direct chat, or an array of{" "}
-          <code>contacts</code> — the button then shows a menu (ideal for
-          businesses with multiple branches).
+          <code>contacts</code> — the button then shows a menu (ideal for a
+          business with multiple branches). Accepts <code>color</code> and{" "}
+          <code>iconColor</code> so the bubble can match any brand palette.
         </p>
       </header>
 
@@ -28,7 +30,7 @@ export default function WhatsAppFloatPage() {
         </h2>
         <div className="relative grid h-72 place-items-center overflow-hidden rounded-xl border border-neutral-200 bg-white/40 dark:border-neutral-800 dark:bg-neutral-950/40">
           <p className="text-sm text-neutral-500">
-            The button floats in the bottom-right corner of its container.
+            Default color — WhatsApp green (<code>#25d366</code>).
           </p>
           <div className="absolute bottom-6 right-6 flex flex-col-reverse items-end gap-3">
             <div className="w-72 rounded-xl border border-neutral-200 bg-white p-2 shadow-xl dark:border-neutral-800 dark:bg-neutral-950">
@@ -46,10 +48,11 @@ export default function WhatsAppFloatPage() {
                 </li>
               </ul>
             </div>
-            <div className="flex size-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-xl">
-              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 32 32" fill="currentColor">
-                <path d="M19.11 17.28c-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.61.13-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.34-.8-.72-1.35-1.6-1.5-1.87-.16-.27-.02-.41.12-.54.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.61-1.47-.84-2.02-.22-.53-.45-.45-.61-.46-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.66 1.12 2.84.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.28.22-.63.22-1.17.16-1.28-.07-.11-.25-.18-.52-.31zM16.01 5.33c-5.89 0-10.67 4.78-10.67 10.67 0 1.88.49 3.72 1.43 5.34L5.33 26.67l5.49-1.44c1.56.85 3.31 1.3 5.11 1.3h.01c5.88 0 10.66-4.78 10.66-10.66 0-2.85-1.11-5.53-3.12-7.54a10.6 10.6 0 0 0-7.55-3.13z" />
-              </svg>
+            <div
+              className="flex size-14 items-center justify-center rounded-full text-white shadow-xl"
+              style={{ backgroundColor: "#25d366" }}
+            >
+              <SiWhatsapp size={26} />
             </div>
           </div>
         </div>
@@ -59,9 +62,6 @@ export default function WhatsAppFloatPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Single contact
         </h2>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          Tapping the button opens WhatsApp directly with the message prefilled.
-        </p>
         <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
           <code>{`import { WhatsAppFloat } from "kora-ui/client";
 
@@ -79,10 +79,6 @@ export default function WhatsAppFloatPage() {
         <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
           Multiple contacts (branches)
         </h2>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          For a business with several locations, pass an array — the button
-          opens a menu so the visitor picks one before the chat opens.
-        </p>
         <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
           <code>{`import { WhatsAppFloat } from "kora-ui/client";
 
@@ -90,17 +86,44 @@ export default function WhatsAppFloatPage() {
   menuTitle="Elige una sucursal"
   message="Hola, me gustaría cotizar"
   contacts={[
-    {
-      name: "Sucursal Centro",
-      label: "Av. Reforma 100",
-      phone: "+52 55 1111 1111",
-    },
-    {
-      name: "Sucursal Polanco",
-      label: "Masaryk 200",
-      phone: "+52 55 2222 2222",
-    },
+    { name: "Centro",  phone: "+52 55 1111 1111", label: "Av. Reforma 100" },
+    { name: "Polanco", phone: "+52 55 2222 2222", label: "Masaryk 200" },
   ]}
+/>`}</code>
+        </pre>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+          Custom color
+        </h2>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          Any CSS color works — hex, rgb, hsl, named, or CSS variables from
+          your palette (including the <a className="underline underline-offset-4" href="/docs/palette">electric palette</a>).
+        </p>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {swatches.map((s) => (
+            <div
+              key={s.name}
+              className="relative flex h-28 items-center justify-center rounded-xl border border-neutral-200 bg-white/40 dark:border-neutral-800 dark:bg-neutral-950/40"
+            >
+              <div
+                className="flex size-14 items-center justify-center rounded-full shadow-xl"
+                style={{ backgroundColor: s.color, color: s.iconColor ?? "#fff" }}
+              >
+                <SiWhatsapp size={26} />
+              </div>
+              <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
+                {s.name}
+              </span>
+            </div>
+          ))}
+        </div>
+        <pre className="overflow-x-auto rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm dark:border-neutral-800 dark:bg-neutral-900">
+          <code>{`<WhatsAppFloat
+  color="var(--color-electric-violet-500)"
+  iconColor="#fff"
+  contact={{ name: "Ventas", phone: "+52 55 1234 5678" }}
 />`}</code>
         </pre>
       </section>
@@ -119,37 +142,39 @@ export default function WhatsAppFloatPage() {
               </tr>
             </thead>
             <tbody className="text-neutral-700 dark:text-neutral-300">
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
-                <td className="px-4 py-3 font-mono text-xs">contact</td>
-                <td className="px-4 py-3 font-mono text-xs">WhatsAppContact</td>
-                <td className="px-4 py-3 font-mono text-xs">—</td>
-              </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
-                <td className="px-4 py-3 font-mono text-xs">contacts</td>
-                <td className="px-4 py-3 font-mono text-xs">WhatsAppContact[]</td>
-                <td className="px-4 py-3 font-mono text-xs">—</td>
-              </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
-                <td className="px-4 py-3 font-mono text-xs">message</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">—</td>
-              </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
-                <td className="px-4 py-3 font-mono text-xs">position</td>
-                <td className="px-4 py-3 font-mono text-xs">
-                  "bottom-right" | "bottom-left" | "top-right" | "top-left"
-                </td>
-                <td className="px-4 py-3 font-mono text-xs">"bottom-right"</td>
-              </tr>
-              <tr className="border-t border-neutral-200 dark:border-neutral-800">
-                <td className="px-4 py-3 font-mono text-xs">menuTitle</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">"Choose a contact"</td>
-              </tr>
+              <Prop name="contact" type="WhatsAppContact" />
+              <Prop name="contacts" type="WhatsAppContact[]" />
+              <Prop name="message" type="string" />
+              <Prop
+                name="position"
+                type='"bottom-right" | "bottom-left" | "top-right" | "top-left"'
+                def='"bottom-right"'
+              />
+              <Prop name="menuTitle" type="string" def='"Choose a contact"' />
+              <Prop name="color" type="string" def='"#25d366"' />
+              <Prop name="iconColor" type="string" def='"#ffffff"' />
+              <Prop name="icon" type="ReactNode" def="<SiWhatsapp />" />
             </tbody>
           </table>
         </div>
       </section>
     </article>
+  );
+}
+
+const swatches = [
+  { name: "WhatsApp", color: "#25d366" },
+  { name: "Electric blue", color: "var(--color-electric-blue-500)" },
+  { name: "Electric violet", color: "var(--color-electric-violet-600)" },
+  { name: "Electric lime", color: "var(--color-electric-lime-400)", iconColor: "#0a0a0a" },
+];
+
+function Prop({ name, type, def = "—" }: { name: string; type: string; def?: string }) {
+  return (
+    <tr className="border-t border-neutral-200 dark:border-neutral-800">
+      <td className="px-4 py-3 font-mono text-xs">{name}</td>
+      <td className="px-4 py-3 font-mono text-xs">{type}</td>
+      <td className="px-4 py-3 font-mono text-xs">{def}</td>
+    </tr>
   );
 }

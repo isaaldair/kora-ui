@@ -6,7 +6,12 @@ const shared = {
   sourcemap: true,
   target: "es2020" as const,
   treeshake: true,
-  external: ["react", "react-dom", "react/jsx-runtime"],
+  external: [
+    "react",
+    "react-dom",
+    "react/jsx-runtime",
+    /^react-icons/,
+  ],
 };
 
 export default defineConfig([
