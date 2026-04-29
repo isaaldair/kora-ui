@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiNpm, SiGithub } from "react-icons/si";
 import { Button } from "kora-ui";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
@@ -47,6 +48,7 @@ export default function RootLayout({
         <div className="flex-1">{children}</div>
         <SiteFooter />
         <ThemeSwitcher />
+        <Analytics />
       </body>
     </html>
   );
